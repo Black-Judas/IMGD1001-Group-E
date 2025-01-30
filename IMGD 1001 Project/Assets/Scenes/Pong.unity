@@ -487,8 +487,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.25
-  m_LinearDrag: 3
+  m_Mass: 0.5
+  m_LinearDrag: 2
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -564,7 +564,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 2, z: 1}
+  m_LocalScale: {x: 0.2, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5979d1c9453f51044b38270c9b7b2082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 10
   ball: {fileID: 503052206}
 --- !u!114 &460926357
 MonoBehaviour:
@@ -595,7 +595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56fb28dea138df41b63eefed2f49b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceStrength: 5
+  bounceStrength: 40
 --- !u!1 &498873720
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,7 +686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56fb28dea138df41b63eefed2f49b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceStrength: 2
+  bounceStrength: 4
 --- !u!1 &503052204
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,8 +763,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 1
-  m_Mass: 0.0625
+  m_UseAutoMass: 0
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38998adc8466d4448c671197e88a507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 200
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56fb28dea138df41b63eefed2f49b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceStrength: 2
+  bounceStrength: 4
 --- !u!1 &1439029299
 GameObject:
   m_ObjectHideFlags: 0
@@ -1316,8 +1316,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.25
-  m_LinearDrag: 3
+  m_Mass: 0.5
+  m_LinearDrag: 2
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -1393,7 +1393,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 2, z: 1}
+  m_LocalScale: {x: 0.2, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1410,8 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd624d39bc450048a0c284725790566, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  ball: {fileID: 503052206}
+  speed: 10
 --- !u!114 &1643729401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1424,7 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b56fb28dea138df41b63eefed2f49b11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceStrength: 5
+  bounceStrength: 40
 --- !u!1 &1800545542
 GameObject:
   m_ObjectHideFlags: 0
