@@ -391,14 +391,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 444831768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec174fa65b833604580dc6628c1e51e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ebf9202fc55d9249982446fc1177060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTrigger:
+  sampleScoreTrigger:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1453734162}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: SampleGameManager, Assembly-CSharp
         m_MethodName: PlayerScores
         m_Mode: 1
         m_Arguments:
@@ -421,8 +421,8 @@ GameObject:
   - component: {fileID: 460926354}
   - component: {fileID: 460926353}
   - component: {fileID: 460926352}
-  - component: {fileID: 460926356}
   - component: {fileID: 460926357}
+  - component: {fileID: 460926356}
   m_Layer: 0
   m_Name: Computer Paddle
   m_TagString: Untagged
@@ -578,11 +578,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 460926351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5979d1c9453f51044b38270c9b7b2082, type: 3}
+  m_Script: {fileID: 11500000, guid: b035e171800fc8847a2edee87aa5b97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  ball: {fileID: 503052206}
+  bounceStrength: 40
 --- !u!114 &460926357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -592,10 +591,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 460926351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56fb28dea138df41b63eefed2f49b11, type: 3}
+  m_Script: {fileID: 11500000, guid: bca470fa22f1ddf45b0d9d1767934760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceStrength: 40
+  speed: 10
+  ball: {fileID: 503052206}
 --- !u!1 &498873720
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +683,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 498873720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56fb28dea138df41b63eefed2f49b11, type: 3}
+  m_Script: {fileID: 11500000, guid: b035e171800fc8847a2edee87aa5b97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bounceStrength: 4
@@ -855,7 +855,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 503052204}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d38998adc8466d4448c671197e88a507, type: 3}
+  m_Script: {fileID: 11500000, guid: 04d400f8b03b13b4d96ca51afb1bcdf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 200
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 668693684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56fb28dea138df41b63eefed2f49b11, type: 3}
+  m_Script: {fileID: 11500000, guid: b035e171800fc8847a2edee87aa5b97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bounceStrength: 4
@@ -1162,12 +1162,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1453734160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73d26071c1c1f6a4883ca80605b03866, type: 3}
+  m_Script: {fileID: 11500000, guid: cf630f3654f72e14b8300e12f35ba684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 503052209}
-  playerPaddle: {fileID: 1643729400}
-  computerPaddle: {fileID: 460926356}
+  playerPaddle: {fileID: 1643729401}
+  computerPaddle: {fileID: 460926357}
   playerScoreText: {fileID: 1439029301}
   computerScoreText: {fileID: 63380855}
 --- !u!1 &1454546982
@@ -1250,8 +1250,8 @@ GameObject:
   - component: {fileID: 1643729398}
   - component: {fileID: 1643729397}
   - component: {fileID: 1643729396}
-  - component: {fileID: 1643729400}
   - component: {fileID: 1643729401}
+  - component: {fileID: 1643729400}
   m_Layer: 0
   m_Name: Player Paddle
   m_TagString: Untagged
@@ -1407,10 +1407,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1643729395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cd624d39bc450048a0c284725790566, type: 3}
+  m_Script: {fileID: 11500000, guid: b035e171800fc8847a2edee87aa5b97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  bounceStrength: 40
 --- !u!114 &1643729401
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1420,10 +1420,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1643729395}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56fb28dea138df41b63eefed2f49b11, type: 3}
+  m_Script: {fileID: 11500000, guid: d6d492905e5e57d47b0f7bd499d31845, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceStrength: 40
+  speed: 10
 --- !u!1 &1800545542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,14 +1511,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1800545542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec174fa65b833604580dc6628c1e51e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ebf9202fc55d9249982446fc1177060, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTrigger:
+  sampleScoreTrigger:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1453734162}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: SampleGameManager, Assembly-CSharp
         m_MethodName: ComputerScores
         m_Mode: 1
         m_Arguments:

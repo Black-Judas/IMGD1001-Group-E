@@ -8,7 +8,7 @@ public class SampleBouncySurface : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Ball ball = collision.gameObject.GetComponent<Ball>();
+        SampleBall ball = collision.gameObject.GetComponent<SampleBall>();
 
         if (ball != null )
         {
