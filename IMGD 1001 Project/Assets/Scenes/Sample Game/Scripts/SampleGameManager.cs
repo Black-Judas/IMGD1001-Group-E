@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SampleGameManager : MonoBehaviour
@@ -15,6 +16,20 @@ public class SampleGameManager : MonoBehaviour
 
     private int _playerScore;
     private int _computerScore;
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Escape key was pressed");
+            SceneManager.LoadScene("Main Menu");
+        }
+    }
+
+    private void ExitToMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 
     public void PlayerScores()
     {
