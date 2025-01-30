@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 0487375b4cbc0124887f7ca862b1acfc
+  - enabled: 1
     path: Assets/Scenes/Sample Game/Sample Game.unity
     guid: 076ea02278cc2c844b9d63e1dba7e607
   - enabled: 1
     path: Assets/Scenes/Pong.unity
-    guid: f456311a591a8a7428f0a4ce59a13752
+    guid: 1675adfb747b0834b8c99194e7ee5565
   - enabled: 1
-    path: Assets/Scenes/Main Menu.unity
-    guid: 0487375b4cbc0124887f7ca862b1acfc
+    path: Assets/Scenes/Version Notes.unity
+    guid: 35050e22253f9864aa07ae705359e12d
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 9b7b4597b7c270c4c86ab6376f04f832
   m_configObjects: {}
