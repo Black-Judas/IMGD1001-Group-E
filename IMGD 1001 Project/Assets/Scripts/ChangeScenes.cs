@@ -3,35 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class changeScene: MonoBehaviour
+public class ChangeScene: MonoBehaviour
 {
-    // Start is called before the first frame update
-    public void gotTogameScene()
+
+    public void GoToGameScene()
     {
         SceneManager.LoadScene("Pong");
     }
 
-    public void gotToTutorialScene()
+    public void GoToTutorialScene()
     {
         SceneManager.LoadScene("Sample Game");
     }
 
 
-    public void gotToCreditsScenel()
+    public void GoToCreditsScene()
     {
         SceneManager.LoadScene("Credits");
     }
 
-    public void gotToVersionNotesScreen()
+    public void GoToVersionNotesScene()
     {
         SceneManager.LoadScene("Version Notes");
     }
 
 
-    public void gotToMainMenuScreen()
+    public void GoToMainMenuScene()
     {
         SceneManager.LoadScene("Main Menu");
     }
-
 
 }
