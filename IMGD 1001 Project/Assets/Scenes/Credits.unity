@@ -570,6 +570,7 @@ RectTransform:
   - {fileID: 995594489}
   - {fileID: 1530194943}
   - {fileID: 961000265}
+  - {fileID: 2022581242}
   - {fileID: 269588807}
   m_Father: {fileID: 684395829}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -721,8 +722,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2022581242}
+  m_Children: []
   m_Father: {fileID: 889235452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1682,8 +1682,9 @@ GameObject:
   - component: {fileID: 2022581242}
   - component: {fileID: 2022581244}
   - component: {fileID: 2022581243}
+  - component: {fileID: 2022581245}
   m_Layer: 5
-  m_Name: Column 1
+  m_Name: Special Thanks Column
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1696,17 +1697,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022581241}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 961000265}
+  m_Father: {fileID: 889235452}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -75}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 0, y: -820.7969}
+  m_SizeDelta: {x: 794.4033, y: 441.5939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2022581243
 MonoBehaviour:
@@ -1731,8 +1732,8 @@ MonoBehaviour:
   m_text: "<b>Worcester Polytechnic Institute</b>\n\n<b>Original Build \nCreated
     by <link=\"https://zigurous.com/tutorials/pong\"><color=#00ffff><u>Zigourous</u></color></link></b>\n\n<b>Music\nby
     <link=\"https://www.youtube.com/channel/UC0kbKFTcjRdmQpHfL6n8FRQ\"><color=#00ffff><u>Beat
-    Thorn</u></color></link></b>\n\n<b>Tutorials Used</b>\n<link=\"https://www.youtube.com/watch?v=lEpigNZwM-4&t=66s\"><color=#00ffff><u>Hyperlinks
-    in Credits</u></color> - Christina Creates Games</link>\n<link=\"https://www.youtube.com/watch?v=Eeee4TU69x4\"><color=#00ffff><u>Rolling
+    Thorn</u></color></link></b>\n\n<b>Tutorials Used</b>\n<link=\"https://www.youtube.com/watch?v=QGPpvOXtgG8\"><color=#00ffff><u>Hyperlinks
+    in Credits</u></color> - Destined To Learn</link>\n<link=\"https://www.youtube.com/watch?v=Eeee4TU69x4\"><color=#00ffff><u>Rolling
     Credits</u></color> - skGameDev</link>\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1810,6 +1811,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022581241}
   m_CullTransparentMesh: 1
+--- !u!114 &2022581245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022581241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc678c5f3aebe514981b264444c90346, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
