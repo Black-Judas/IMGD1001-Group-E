@@ -423,8 +423,9 @@ GameObject:
   - component: {fileID: 460926352}
   - component: {fileID: 460926356}
   - component: {fileID: 460926357}
+  - component: {fileID: 460926358}
   m_Layer: 0
-  m_Name: Computer Paddle
+  m_Name: Player2 Paddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -576,7 +577,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460926351}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5979d1c9453f51044b38270c9b7b2082, type: 3}
   m_Name: 
@@ -596,6 +597,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceStrength: 40
+--- !u!114 &460926358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460926351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35168df361bf9b246938aa974b5f8541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1 &498873720
 GameObject:
   m_ObjectHideFlags: 0
