@@ -10,7 +10,7 @@ public class ScrollingCredits : MonoBehaviour
 
     private RectTransform RectTransform;
 
-    private bool userIsInControl = false;
+    public bool userIsInControl = false;
 
 
     private void Awake()
