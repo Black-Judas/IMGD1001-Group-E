@@ -6,13 +6,16 @@ public class PlayerPaddle : Paddle
 {
     private Vector2 _direction;
 
+    public KeyCode moveUp = KeyCode.W;
+    public KeyCode moveDown = KeyCode.S;
+
     private void Update()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(moveUp))
         {
             _direction = Vector2.up;
         }
-        else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(moveDown))
         {
             _direction = Vector2.down;
         }
