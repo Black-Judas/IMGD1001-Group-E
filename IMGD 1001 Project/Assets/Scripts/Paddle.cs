@@ -17,4 +17,25 @@ public class Paddle : MonoBehaviour
         _rigidbody.position = new Vector2(_rigidbody.position.x, 0.0f);
         _rigidbody.velocity = Vector2.zero;
     }
+
+    private void OnCollisionEnter2D (Collision2D collision)
+    {
+        Ball ball = collision.gameObject.GetComponent<Ball>();
+
+        if (ball != null)
+        {
+            BallHit();
+        }
+
+    }
+
+    private void BallHit()
+    {
+        string speedTier = "A";
+        string variant = Random.Range(1, 5).ToString();
+
+        string soundToPlay = "hit" + speedTier + variant;
+
+        AudioManager.instance.PlaySFX(soundToPlay, 1);
+    }
 }
