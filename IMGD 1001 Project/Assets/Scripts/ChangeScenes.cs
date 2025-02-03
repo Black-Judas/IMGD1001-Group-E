@@ -8,7 +8,7 @@ public class ChangeScene: MonoBehaviour
 
     public void GoToGameScene()
     {
-        SceneManager.LoadScene("Pong");
+        SceneManager.LoadScene("Game");
     }
 
     public void GoToTutorialScene()
