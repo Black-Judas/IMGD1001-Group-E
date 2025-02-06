@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Sample Game/Sample Game.unity
     guid: 076ea02278cc2c844b9d63e1dba7e607
   - enabled: 1
-    path: Assets/Scenes/Pong.unity
-    guid: 1675adfb747b0834b8c99194e7ee5565
+    path: Assets/Scenes/Game.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
     path: Assets/Scenes/Version Notes.unity
     guid: 35050e22253f9864aa07ae705359e12d
