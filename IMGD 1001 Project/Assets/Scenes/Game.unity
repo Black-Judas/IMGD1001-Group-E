@@ -152,8 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music:
-  - name: menuTheme
-    clip: {fileID: 8300000, guid: f9df1eba44cb94c48a39fc2a54ba68cc, type: 3}
   - name: gameTheme
     clip: {fileID: 8300000, guid: 8fa880f947e23ef4797989c4e60530e9, type: 3}
   sfx:

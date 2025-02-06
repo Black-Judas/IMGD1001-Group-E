@@ -7,11 +7,9 @@ public class GameManager : MonoBehaviour
 {
     public Ball ball;
 
-    public Paddle playerPaddle;
-    public Paddle computerPaddle;
+    public Paddle playerPaddle, computerPaddle;
 
-    public Text playerScoreText;
-    public Text computerScoreText;
+    public Text playerScoreText, computerScoreText;
 
     private int _playerScore;
     private int _computerScore;
