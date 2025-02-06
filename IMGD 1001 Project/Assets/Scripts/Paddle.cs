@@ -24,14 +24,29 @@ public class Paddle : MonoBehaviour
 
         if (ball != null)
         {
-            BallHit();
+            BallHit(ball);
         }
 
     }
 
-    private void BallHit()
+    private void BallHit(Ball ball = null)
     {
-        string speedTier = "A";
+        Debug.Log(ball.GetVelocity().magnitude);
+
+
+        string speedTier = "Light";
+
+
+        if (ball.GetVelocity().magnitude < 6)
+        {
+            speedTier = "Light";
+        } else if (ball.GetVelocity().magnitude < 8)
+        {
+            speedTier = "Medium";
+        } else {
+            speedTier = "Heavy";
+        }
+
         string variant = Random.Range(1, 5).ToString();
 
         string soundToPlay = "hit" + speedTier + variant;
