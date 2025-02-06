@@ -96,11 +96,13 @@ MonoBehaviour:
     instantiationMode: 1
   - dependency: {fileID: 8300000, guid: dbe9a4bf13a4aa24a92a5712c278422f, type: 3}
     instantiationMode: 1
+  - dependency: {fileID: 7322773738228878314, guid: f0fe317ce19dce745a3476aac40a38b7, type: 3}
+    instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
     instantiationMode: 0
-  - dependency: {fileID: 8300000, guid: f9df1eba44cb94c48a39fc2a54ba68cc, type: 3}
-    instantiationMode: 1
   - dependency: {fileID: 6200000, guid: 1c39c85a2fc5e994084fe195c2594daf, type: 2}
+    instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: fa92d85ebf163c540a14cc442f63eadb, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 8300000, guid: 056565066f0dd2b4f90590692630ef82, type: 3}
     instantiationMode: 1

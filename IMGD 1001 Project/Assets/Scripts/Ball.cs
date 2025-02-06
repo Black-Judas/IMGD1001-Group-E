@@ -6,7 +6,11 @@ public class Ball : MonoBehaviour
 {
     public float speed = 200f;
 
+    [SerializeField] private ParticleSystem impactParticles;
+
     private Rigidbody2D _rigidbody;
+
+    private ParticleSystem impactParticlesInstance;
 
     private void Awake()
     {
@@ -43,5 +47,18 @@ public class Ball : MonoBehaviour
     public Vector2 GetVelocity()
     {
         return _rigidbody.velocity;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Spawn in particles
+        SpawnImpactParticles(collision);
+
+    }
+
+    private void SpawnImpactParticles(Collision2D collision)
+    {
+        Vector2 contactPoint = collision.GetContact(0).point;   //Determine contact point
+        impactParticlesInstance = Instantiate(impactParticles, new Vector3(contactPoint.x, contactPoint.y, 0), Quaternion.identity);    //Spawn in particles at that point
     }
 }
