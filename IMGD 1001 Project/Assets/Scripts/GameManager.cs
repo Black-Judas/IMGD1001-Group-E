@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour
     private int _playerScore;
     private int _computerScore;
 
+    private void Start()
+    {
+        AudioManager.instance.PlayMusic("gameTheme");
+    }
+
     public void PlayerScores()
     {
         _playerScore++;
