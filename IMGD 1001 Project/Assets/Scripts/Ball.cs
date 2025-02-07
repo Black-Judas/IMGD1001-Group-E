@@ -6,6 +6,15 @@ public class Ball : MonoBehaviour
 {
     public float speed = 200f;
 
+    public enum speedTier {
+        Slow,
+        Medium,
+        Fast,
+        Lightning
+    }
+
+    private speedTier currentSpeedTier = speedTier.Slow;
+
     [SerializeField] private ParticleSystem impactParticles;
 
     private Rigidbody2D _rigidbody;
@@ -17,10 +26,25 @@ public class Ball : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    private void Update()
     {
-        ResetPosition();
-        AddStartingForce();
+        if (GetVelocity().magnitude > 17)
+        {
+            currentSpeedTier = speedTier.Lightning;
+        } 
+        else if (GetVelocity().magnitude > 13)
+        {
+            currentSpeedTier = speedTier.Fast;
+        }
+        else if (GetVelocity().magnitude > 10)
+        {
+            currentSpeedTier = speedTier.Medium;
+        }
+        else
+        {
+            currentSpeedTier = speedTier.Slow;
+        }
+
     }
 
     public void AddStartingForce()
@@ -60,5 +84,10 @@ public class Ball : MonoBehaviour
     {
         Vector2 contactPoint = collision.GetContact(0).point;   //Determine contact point
         impactParticlesInstance = Instantiate(impactParticles, new Vector3(contactPoint.x, contactPoint.y, 0), Quaternion.identity);    //Spawn in particles at that point
+    }
+
+    public speedTier GetSpeedTier()
+    {
+        return this.currentSpeedTier;
     }
 }
