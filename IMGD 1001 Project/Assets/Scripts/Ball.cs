@@ -20,7 +20,6 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         ResetPosition();
-        AddStartingForce();
     }
 
     public void AddStartingForce()
