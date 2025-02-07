@@ -588,7 +588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<u><b>0.0.1.0s1</b></u>
+  m_text: '<u><b>v0.0.1.0s1</b></u>
 
     - Added main menu
 
@@ -603,7 +603,18 @@ MonoBehaviour:
     Player 1 now only controls with W and S keys
 
     - Player 2 now controls with
-    up and down arrows'
+    up and down arrows
+
+    <u><b>v0.0.3.0s2</b></u>
+
+    - Added particle effects
+    on ball impact
+
+    - Added splash screens
+
+    - Added music and sound effects
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -754,7 +765,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: '<u><b>Version Notes
-
 
 
 '
