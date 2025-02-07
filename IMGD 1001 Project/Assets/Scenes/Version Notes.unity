@@ -588,7 +588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<u><b>0.0.1.0s1</b></u>
+  m_text: '<u><b>v0.0.1.0s1</b></u>
 
     - Added main menu
 
@@ -607,12 +607,12 @@ MonoBehaviour:
 
     <u><b>v0.0.3.0s2</b></u>
 
-    - Added particles
+    - Added particle effects
+    on ball impact
 
-    -
-    Added splash screens
+    - Added splash screens
 
-    - Added sound, music now plays and hit sounds play
+    - Added music and sound effects
 
 '
   m_isRightToLeft: 0
