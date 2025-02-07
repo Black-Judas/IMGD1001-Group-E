@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        AudioManager.instance.PlayMusic("gameTheme");
         _coroutine = StartCoroutine(StartRound(countdownSeconds));
     }
 
@@ -56,14 +55,28 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Starting Round");
         countdownText.enabled = true;
+        float currentSecond = math.ceil(countdownSeconds);
+
         while (countdownSeconds > 0)
         {
+            if (currentSecond != math.floor(countdownSeconds))
+            {
+                Debug.Log(currentSecond);
+                AudioManager.instance.PlaySFX("beep1");
+                currentSecond = math.floor(countdownSeconds);
+            }
+            countdownText.transform.localScale = new Vector3(countdownSeconds % 1+0.4f, countdownSeconds % 1+0.4f, 1);
             countdownText.text = math.ceil(countdownSeconds).ToString();
             countdownSeconds -= Time.deltaTime;
             yield return null;
         }
 
+        if (AudioManager.instance.musicSource.isPlaying == false)
+        {
+            AudioManager.instance.PlayMusic("gameTheme");
+        }
         countdownText.enabled = false;
+        AudioManager.instance.PlaySFX("ballLaunch");
         this.ball.AddStartingForce();
     }
 }
