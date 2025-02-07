@@ -45,11 +45,11 @@ public class AudioManager : MonoBehaviour
 
         if (sound == null)
         {
-            Debug.Log("Sounds Not Found");
+            Debug.LogError(name+" Not Found");
         }
         else
         {
-            Debug.Log("Playing " + sound.clip + " at " + volume + " volume");
+            //Debug.Log("Playing " + sound.clip + " at " + volume + " volume");
             sfxSource.PlayOneShot(sound.clip, volume * sfxSource.volume);
         }
     }

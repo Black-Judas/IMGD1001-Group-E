@@ -24,33 +24,43 @@ public class Paddle : MonoBehaviour
 
         if (ball != null)
         {
-            BallHit(ball);
+            OnBallHit(ball);
         }
 
     }
 
-    private void BallHit(Ball ball = null)
+    private void OnBallHit(Ball ball = null)
     {
-        Debug.Log(ball.GetVelocity().magnitude);
+        //Check how fast the ball is going
+        Ball.speedTier speedTier = ball.GetSpeedTier();
+        //Debug.Log(speedTier);
 
-
-        string speedTier = "Light";
-
-
-        if (ball.GetVelocity().magnitude < 6)
-        {
-            speedTier = "Light";
-        } else if (ball.GetVelocity().magnitude < 8)
-        {
-            speedTier = "Medium";
-        } else {
-            speedTier = "Heavy";
-        }
-
+        //Choose a random variant to play
         string variant = Random.Range(1, 5).ToString();
 
-        string soundToPlay = "hit" + speedTier + variant;
+        
+        //Determine what sound effect to play based on how fast the ball hits the paddle
+        string soundToPlay = null;
 
+        switch (speedTier)
+        {
+            case Ball.speedTier.Slow:
+                soundToPlay = "hit" + "Light" + variant;
+                break;
+            case Ball.speedTier.Medium:
+                soundToPlay = "hit" + "Medium" + variant;
+                break;
+            case Ball.speedTier.Fast:
+                soundToPlay = "hit" + "Heavy" + variant;
+                break;
+            case Ball.speedTier.Lightning:
+                AudioManager.instance.PlaySFX("ballLaunch"); //TODO: Figure out how to handle super fast impacts
+                soundToPlay = "hit" + "Heavy" + variant;
+                break;
+        }
+
+
+        //Play the sound
         AudioManager.instance.PlaySFX(soundToPlay, 1);
     }
 }

@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartRound(float countdownSeconds)
     {
-        Debug.Log("Starting Round");
+        //Debug.Log("Starting Round");
         countdownText.enabled = true;
         float currentSecond = math.ceil(countdownSeconds);
 
@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
         {
             if (currentSecond != math.floor(countdownSeconds))
             {
-                Debug.Log(currentSecond);
+                //Debug.Log(currentSecond);
                 AudioManager.instance.PlaySFX("beep1");
                 currentSecond = math.floor(countdownSeconds);
             }
