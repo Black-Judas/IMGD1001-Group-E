@@ -18,12 +18,14 @@ public class Ball : MonoBehaviour
     [SerializeField] private ParticleSystem impactParticles;
 
     private Rigidbody2D _rigidbody;
+    private SpriteRenderer _spriteRenderer;
 
     private ParticleSystem impactParticlesInstance;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -89,5 +91,10 @@ public class Ball : MonoBehaviour
     public speedTier GetSpeedTier()
     {
         return this.currentSpeedTier;
+    }
+
+    public void ChangeColor(Color color)
+    {
+        _spriteRenderer.color = color;
     }
 }

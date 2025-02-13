@@ -14,14 +14,6 @@ public abstract class Paddle : MonoBehaviour
 
     public List<ModifierList> modifiers = new List<ModifierList>();
 
-    private void Start()
-    {
-        SpeedBuff mod = new SpeedBuff();
-        modifiers.Add(new ModifierList(mod, mod.Name, 2));
-        speed = modifiers[0].modifier.StatChange(this, baseSpeed, 2);
-    }
-
-
     protected Rigidbody2D _rigidbody;
 
     private void Awake()
@@ -50,7 +42,16 @@ public abstract class Paddle : MonoBehaviour
 
     }
 
-    private void OnBallHit(Ball ball = null)
+    private void OnBallHit(Ball ball)
+    {
+        BallImpactSound(ball);
+        foreach (ModifierList modifier in modifiers)
+        {
+            modifier.modifier.OnBallHit(ball);
+        }
+    }
+
+    private void BallImpactSound(Ball ball)
     {
         //Check how fast the ball is going
         Ball.speedTier speedTier = ball.GetSpeedTier();
@@ -59,7 +60,7 @@ public abstract class Paddle : MonoBehaviour
         //Choose a random variant to play
         string variant = Random.Range(1, 5).ToString();
 
-        
+
         //Determine what sound effect to play based on how fast the ball hits the paddle
         string soundToPlay = null;
 
@@ -83,10 +84,5 @@ public abstract class Paddle : MonoBehaviour
 
         //Play the sound
         AudioManager.instance.PlaySFX(soundToPlay, 1);
-    }
-
-    private void UpdateStats()
-    {
-        
     }
 }

@@ -22,6 +22,17 @@ public class SpeedBuff : Modifier
     {
         return speed + 3 + (2*stacks);
     }
-
 }
 
+public class BlueBalls : Modifier //THIS IS JUST FOR DEBUGGING, PLEASE REMOVE LATER
+{
+    public override string Name { get { return "Blue Balls"; } }
+    public override string Description { get { return "Turns the ball blue"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } }
+    public override upgradeRarities Rarity { get { return upgradeRarities.Legendary; } }
+
+    public override void OnBallHit(Ball ball)
+    {
+        ball.ChangeColor(Color.blue);
+    }
+}
