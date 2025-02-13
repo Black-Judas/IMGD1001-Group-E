@@ -2,14 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Paddle : MonoBehaviour
+public abstract class Paddle : MonoBehaviour
 {
-    public float speed = 10f;
+    //Base stats
+    public float baseSpeed = 10f;
+    public float baseSize = 1f;
+
+    //Current stats
+    public float speed;
+    public float size;
+
+    public List<ModifierList> modifiers = new List<ModifierList>();
+
+    private void Start()
+    {
+        SpeedBuff mod = new SpeedBuff();
+        modifiers.Add(new ModifierList(mod, mod.Name, 2));
+        speed = modifiers[0].modifier.StatChange(this, baseSpeed, 2);
+    }
+
+
     protected Rigidbody2D _rigidbody;
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+
+        //Initialize stats at their base value
+        speed = baseSpeed;
+        size = baseSize;
     }
 
     public void ResetPosition()
@@ -62,5 +83,10 @@ public class Paddle : MonoBehaviour
 
         //Play the sound
         AudioManager.instance.PlaySFX(soundToPlay, 1);
+    }
+
+    private void UpdateStats()
+    {
+        
     }
 }

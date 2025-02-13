@@ -13,11 +13,11 @@ public class ComputerPaddle : Paddle
         {
             if (this.ball.position.y > this.transform.position.y)
             {
-                _rigidbody.AddForce(Vector2.up * this.speed);
+                _rigidbody.AddForce(Vector2.up * this.baseSpeed);
             }
             else if (this.ball.position.y < this.transform.position.y)
             {
-                _rigidbody.AddForce(Vector2.down * this.speed);
+                _rigidbody.AddForce(Vector2.down * this.baseSpeed);
             }
         }
 
@@ -26,11 +26,11 @@ public class ComputerPaddle : Paddle
         {
             if (this.transform.position.y > 0f)
             {
-                _rigidbody.AddForce(Vector2.down * this.speed);
+                _rigidbody.AddForce(Vector2.down * this.baseSpeed);
             }
             else if (this.transform.position.y < 0f)
             {
-                _rigidbody.AddForce(Vector2.up * this.speed);
+                _rigidbody.AddForce(Vector2.up * this.baseSpeed);
             }
         }
     }
