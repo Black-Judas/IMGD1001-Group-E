@@ -818,6 +818,8 @@ MonoBehaviour:
   speed: 10
   moveUp: 273
   moveDown: 274
+  debugMode: 0
+  ball: {fileID: 503052209}
 --- !u!1 &498873720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1894,6 +1896,8 @@ MonoBehaviour:
   speed: 10
   moveUp: 119
   moveDown: 115
+  debugMode: 0
+  ball: {fileID: 503052209}
 --- !u!114 &1643729401
 MonoBehaviour:
   m_ObjectHideFlags: 0

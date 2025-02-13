@@ -9,6 +9,9 @@ public class PlayerPaddle : Paddle
     public KeyCode moveUp = KeyCode.W;
     public KeyCode moveDown = KeyCode.S;
 
+    public bool debugMode = false;
+    public Ball ball;
+
     private void Update()
     {
         if (Input.GetKey(moveUp))
@@ -22,6 +25,11 @@ public class PlayerPaddle : Paddle
         else
         {
             _direction = Vector2.zero;
+        }
+
+        if (debugMode == true)
+        {
+            transform.position = new Vector3(transform.position.x, ball.transform.position.y, transform.position.z);
         }
     }
 

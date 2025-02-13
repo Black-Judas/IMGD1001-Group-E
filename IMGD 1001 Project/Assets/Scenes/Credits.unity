@@ -693,6 +693,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scrollSpeed: 40
+  userIsInControl: 0
 --- !u!1 &961000264
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,8 +1707,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -820.7969}
-  m_SizeDelta: {x: 794.4033, y: 441.5939}
+  m_AnchoredPosition: {x: 0, y: -854.7}
+  m_SizeDelta: {x: 794.4033, y: 525.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2022581243
 MonoBehaviour:
@@ -1734,7 +1735,10 @@ MonoBehaviour:
     <link=\"https://www.youtube.com/channel/UC0kbKFTcjRdmQpHfL6n8FRQ\"><color=#00ffff><u>Beat
     Thorn</u></color></link></b>\n\n<b>Tutorials Used</b>\n<link=\"https://www.youtube.com/watch?v=QGPpvOXtgG8\"><color=#00ffff><u>Hyperlinks
     in Credits</u></color> - Destined To Learn</link>\n<link=\"https://www.youtube.com/watch?v=Eeee4TU69x4\"><color=#00ffff><u>Rolling
-    Credits</u></color> - skGameDev</link>\n\n"
+    Credits</u></color> - skGameDev</link>\n<link=\"https://www.youtube.com/watch?v=rdX7nhH6jdM\"><color=#00ffff><u>Audio
+    Manager</u></color> - Rehope Games</link>\n<link=\"https://www.youtube.com/watch?v=0HKSvT2gcuk\"><color=#00ffff><u>Particle
+    Effects</u></color> - Sasquatch B Studios</link>\n<link=\"https://www.youtube.com/watch?v=iU6mKyQjOYI&list=WL&index=42\"><color=#00ffff><u>Rogue-lite
+    Style Items and Effects</u></color> - Joseph Mask</link>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1769,7 +1773,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
