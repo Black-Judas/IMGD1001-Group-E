@@ -12,6 +12,9 @@ public class PlayerPaddle : Paddle
     public bool debugMode = false;
     public Ball ball;
 
+    
+
+
     private void Update()
     {
         if (Input.GetKey(moveUp))
@@ -31,6 +34,10 @@ public class PlayerPaddle : Paddle
         {
             transform.position = new Vector3(transform.position.x, ball.transform.position.y, transform.position.z);
         }
+
+        //Update the player's y scale based on their scale stat
+        //transform.localScale = new Vector3(1, stats.GetStat("size"), 1);
+
     }
 
 
@@ -38,7 +45,7 @@ public class PlayerPaddle : Paddle
     {
         if (_direction.sqrMagnitude != 0)
         {
-            _rigidbody.AddForce(_direction * this.speed);
+            _rigidbody.AddForce(_direction * this.stats.GetStat("speed"));
         }
     }
 }

@@ -4,25 +4,26 @@ using UnityEngine;
 
 public abstract class Paddle : MonoBehaviour
 {
-    //Base stats
-    public float baseSpeed = 10f;
-    public float baseSize = 1f;
-
-    //Current stats
-    public float speed;
-    public float size;
 
     public List<ModifierList> modifiers = new List<ModifierList>();
 
+    public StatsList baseStats { get; protected set; }
+    public StatsList stats { get; protected set; }
+
     protected Rigidbody2D _rigidbody;
+    protected StatHandler statHandler;
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody2D>();
 
-        //Initialize stats at their base value
-        speed = baseSpeed;
-        size = baseSize;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        statHandler = FindObjectOfType<StatHandler>();
+
+        //Initialize the player's stats
+        baseStats = statHandler.GetStats(this);
+        stats = baseStats;
+
+
     }
 
     public void ResetPosition()
