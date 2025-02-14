@@ -1448,6 +1448,26 @@ MonoBehaviour:
     -
     Added controls to version notes screen
 
+
+
+    <u><b>v0.0.4.0s4</b></u>
+
+    -
+    Added icons
+
+    - Added new paddle art
+
+    - Refined player controls, giving
+    a higher speed and faster deceleration
+
+    - Ball now starts faster and can
+    reach a much higher max speed
+
+    - Added a countdown before the ball is served
+
+    -
+    Improved audio for ball interactions
+
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
