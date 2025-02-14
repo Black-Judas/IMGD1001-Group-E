@@ -1395,7 +1395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52.392822, y: 300.14}
+  m_AnchoredPosition: {x: 52.392822, y: 543}
   m_SizeDelta: {x: 221.39, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1183344324
@@ -1450,23 +1450,23 @@ MonoBehaviour:
 
 
 
-    <u><b>v0.0.4.0s4</b></u>
+    <u><b>v0.0.4.0s3</b></u>
 
     -
-    Added icons
+    Added game icon
 
-    - Added new paddle art
+    - Changed shape of paddle
 
-    - Refined player controls, giving
-    a higher speed and faster deceleration
+    - Refined player controls,
+    giving a higher speed and faster deceleration
 
-    - Ball now starts faster and can
-    reach a much higher max speed
+    - Ball now starts faster and
+    can reach a much higher max speed
 
-    - Added a countdown before the ball is served
+    - Added a countdown before the ball is
+    served
 
-    -
-    Improved audio for ball interactions
+    - Improved audio for ball interactions
 
 '
   m_isRightToLeft: 0
