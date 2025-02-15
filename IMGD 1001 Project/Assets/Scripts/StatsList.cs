@@ -19,7 +19,7 @@ public class Stat
 [System.Serializable]
 public class StatsList
 {
-    public List<Stat> stats = new List<Stat>();
+    private List<Stat> stats = new List<Stat>();
     public void AddStat(string name, float value) //Add a stat to the list
     {
         stats.Add(new Stat(name, value));
@@ -42,13 +42,7 @@ public class StatsList
     }
     public float GetStat(string name) //Get the value of a stat
     {
-        Debug.Log("Getting stat: " + name);
-        Stat stat = stats.Find(x => x._name == name);
-
-        Debug.Log("Getting value of " + stat._name);
-        float value = stat._value;
-
-        return value;
+        return stats.Find(x => x._name == name)._value;
     }
 
     public override string ToString()

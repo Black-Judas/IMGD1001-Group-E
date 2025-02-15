@@ -23,7 +23,6 @@ public abstract class Paddle : MonoBehaviour
         baseStats = statHandler.GetStats(this);
         stats = baseStats;
 
-
     }
 
     public void ResetPosition()

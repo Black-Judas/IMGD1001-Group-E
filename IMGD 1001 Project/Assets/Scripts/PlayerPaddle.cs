@@ -36,7 +36,7 @@ public class PlayerPaddle : Paddle
         }
 
         //Update the player's y scale based on their scale stat
-        //transform.localScale = new Vector3(1, stats.GetStat("size"), 1);
+        transform.localScale = new Vector3(transform.localScale.x, stats.GetStat("size"), transform.localScale.z);
 
     }
 

@@ -17,7 +17,6 @@ public class StatHandler : MonoBehaviour
 
     //Base stats
     public float baseSpeed = 10f;
-    public float baseScale = 1f;
 
     public StatsList GetStats(Paddle player)
     {
@@ -29,7 +28,7 @@ public class StatHandler : MonoBehaviour
         {
             playerStats.Add(player, new StatsList());
             playerStats[player].AddStat("speed", baseSpeed);
-            playerStats[player].AddStat("size", baseScale);
+            playerStats[player].AddStat("size", player.transform.localScale.y);
             return playerStats[player];
         }
     }
