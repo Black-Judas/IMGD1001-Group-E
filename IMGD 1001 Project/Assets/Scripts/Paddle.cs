@@ -5,28 +5,40 @@ using UnityEngine;
 public abstract class Paddle : MonoBehaviour
 {
 
-    [SerializeField] public List<Modifier> modifiers = new List<Modifier>();
-    [SerializeField] private List<string> modifierList = new List<string>();
+    public List<Modifier> modifiers = new List<Modifier>();
+    public List<ModifierPanel> activeModifiers = new List<ModifierPanel>();
 
-    public StatsList baseStats { get; protected set; }
+
     public StatsList stats { get; protected set; }
-    [SerializeField] protected string currentStats;
+    public List<string> currentStats;
 
     protected Rigidbody2D _rigidbody;
     public StatHandler statHandler { get; protected set; }
+    public ModifierHandler modifierHandler { get; protected set; }
 
     private void Awake()
     {
 
         _rigidbody = GetComponent<Rigidbody2D>();
         statHandler = FindObjectOfType<StatHandler>();
+        modifierHandler = FindObjectOfType<ModifierHandler>();
 
         //Initialize the player's stats
-        baseStats = statHandler.GetStats(this);
-        stats = baseStats;
+        stats = statHandler.GetStats(this);
 
+        //Debug: Add a modifier to the player
+        //modifierHandler.addModifier(this, new SpeedBuff());
 
+    }
 
+    public void UpdateStats()
+    {
+        stats = statHandler.GetStats(this);
+    }
+
+    public float GetStat(string name)
+    {
+        return stats.GetStat(name);
     }
 
     public void ResetPosition()

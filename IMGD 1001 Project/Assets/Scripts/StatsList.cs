@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Stat
 {
-    [SerializeField] public string _name { get; }
-    [SerializeField] public float _value { get; set; }
+    public string _name { get; }
+    public float _value { get; set; }
 
     public Stat(string name, float value)
     {
@@ -19,7 +19,7 @@ public class Stat
 [System.Serializable]
 public class StatsList
 {
-    private List<Stat> stats = new List<Stat>();
+    [field:SerializeField] public List<Stat> stats { get; private set; } = new List<Stat>();
     public void AddStat(string name, float value) //Add a stat to the list
     {
         stats.Add(new Stat(name, value));

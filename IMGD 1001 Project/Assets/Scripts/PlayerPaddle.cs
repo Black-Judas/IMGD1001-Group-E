@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerPaddle : Paddle
@@ -36,8 +38,12 @@ public class PlayerPaddle : Paddle
         //Update the player's y scale based on their scale stat
         transform.localScale = new Vector3(transform.localScale.x, stats.GetStat("size"), transform.localScale.z);
 
-        //Display current stats in inspector
-        currentStats = stats.ToString();
+        //Display current stats in new list in inspector
+        currentStats = new List<string>();
+        foreach (Stat stat in stats.stats)
+        {
+            currentStats.Add(stat._name.FirstCharacterToUpper() + ": " + stat._value);
+        }
 
     }
 
