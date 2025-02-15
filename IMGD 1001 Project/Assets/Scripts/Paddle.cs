@@ -2,14 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Paddle : MonoBehaviour
+public abstract class Paddle : MonoBehaviour
 {
-    public float speed = 10f;
+
+    public List<Modifier> modifiers = new List<Modifier>();
+    public List<ModifierPanel> activeModifiers = new List<ModifierPanel>();
+
+
+    public StatsList stats { get; protected set; }
+    public List<string> currentStats;
+
     protected Rigidbody2D _rigidbody;
+    public StatHandler statHandler { get; protected set; }
+    public ModifierHandler modifierHandler { get; protected set; }
 
     private void Awake()
     {
+
         _rigidbody = GetComponent<Rigidbody2D>();
+        statHandler = FindObjectOfType<StatHandler>();
+        modifierHandler = FindObjectOfType<ModifierHandler>();
+
+        //Initialize the player's stats
+        stats = statHandler.GetStats(this);
+
+        //Debug: Add a modifier to the player
+        //modifierHandler.addModifier(this, new SpeedBuff());
+
+    }
+
+    public void UpdateStats()
+    {
+        stats = statHandler.GetStats(this);
+    }
+
+    public float GetStat(string name)
+    {
+        return stats.GetStat(name);
     }
 
     public void ResetPosition()
@@ -29,7 +58,16 @@ public class Paddle : MonoBehaviour
 
     }
 
-    private void OnBallHit(Ball ball = null)
+    private void OnBallHit(Ball ball)
+    {
+        BallImpactSound(ball);
+        foreach (Modifier modifier in modifiers)
+        {
+            modifier.OnBallHit(ball);
+        }
+    }
+
+    private void BallImpactSound(Ball ball)
     {
         //Check how fast the ball is going
         Ball.speedTier speedTier = ball.GetSpeedTier();
@@ -38,7 +76,7 @@ public class Paddle : MonoBehaviour
         //Choose a random variant to play
         string variant = Random.Range(1, 5).ToString();
 
-        
+
         //Determine what sound effect to play based on how fast the ball hits the paddle
         string soundToPlay = null;
 
