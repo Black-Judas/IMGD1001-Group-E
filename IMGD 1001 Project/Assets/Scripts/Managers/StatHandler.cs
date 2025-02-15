@@ -15,6 +15,9 @@ public class StatHandler : MonoBehaviour
         }
     }
 
+
+
+
     //Base stats
     public float baseSpeed = 10f;
 
@@ -30,6 +33,14 @@ public class StatHandler : MonoBehaviour
             playerStats[player].AddStat("speed", baseSpeed);
             playerStats[player].AddStat("size", player.transform.localScale.y);
             return playerStats[player];
+        }
+    }
+
+    public void SetStat(Paddle player, string stat, float value)
+    {
+        if (playerStats.ContainsKey(player)) //Set the stat if the player is in the dictionary
+        {
+            playerStats[player].SetStat(stat, value);
         }
     }
 }

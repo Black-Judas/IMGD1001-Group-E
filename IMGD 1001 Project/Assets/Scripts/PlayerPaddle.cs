@@ -12,8 +12,6 @@ public class PlayerPaddle : Paddle
     public bool debugMode = false;
     public Ball ball;
 
-    
-
 
     private void Update()
     {
@@ -37,6 +35,9 @@ public class PlayerPaddle : Paddle
 
         //Update the player's y scale based on their scale stat
         transform.localScale = new Vector3(transform.localScale.x, stats.GetStat("size"), transform.localScale.z);
+
+        //Display current stats in inspector
+        currentStats = stats.ToString();
 
     }
 

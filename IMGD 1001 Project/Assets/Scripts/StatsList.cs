@@ -45,7 +45,7 @@ public class StatsList
         return stats.Find(x => x._name == name)._value;
     }
 
-    public override string ToString()
+    public override string ToString() //Return a string of all the stats
     {
         string result = "";
         foreach (Stat stat in stats)

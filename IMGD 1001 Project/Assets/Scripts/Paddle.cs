@@ -5,13 +5,15 @@ using UnityEngine;
 public abstract class Paddle : MonoBehaviour
 {
 
-    public List<ModifierList> modifiers = new List<ModifierList>();
+    [SerializeField] public List<Modifier> modifiers = new List<Modifier>();
+    [SerializeField] private List<string> modifierList = new List<string>();
 
     public StatsList baseStats { get; protected set; }
     public StatsList stats { get; protected set; }
+    [SerializeField] protected string currentStats;
 
     protected Rigidbody2D _rigidbody;
-    protected StatHandler statHandler;
+    public StatHandler statHandler { get; protected set; }
 
     private void Awake()
     {
@@ -22,6 +24,8 @@ public abstract class Paddle : MonoBehaviour
         //Initialize the player's stats
         baseStats = statHandler.GetStats(this);
         stats = baseStats;
+
+
 
     }
 
@@ -45,9 +49,9 @@ public abstract class Paddle : MonoBehaviour
     private void OnBallHit(Ball ball)
     {
         BallImpactSound(ball);
-        foreach (ModifierList modifier in modifiers)
+        foreach (Modifier modifier in modifiers)
         {
-            modifier.modifier.OnBallHit(ball);
+            modifier.OnBallHit(ball);
         }
     }
 
