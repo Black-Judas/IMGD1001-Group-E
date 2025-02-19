@@ -21,6 +21,7 @@ public class ModifierHandler : MonoBehaviour
         modifierList.Add(new SizeBuff());
 
         //Clear the dropdown and add all modifiers from the list to it
+        Debug.Log("Adding modifiers to "+modifierDropdown);
         modifierDropdown.ClearOptions();
         foreach (Modifier modifier in modifierList)
         {

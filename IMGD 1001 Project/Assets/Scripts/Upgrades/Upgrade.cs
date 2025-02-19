@@ -16,4 +16,7 @@ public abstract class Upgrade
         Legendary
     }
     public abstract upgradeRarities Rarity { get; } //The rarity level of the upgrade
+
+    protected Paddle player; // The player that the modifier is applied to
+    public void SetPlayer(Paddle player) { this.player = player; } // Set the player that the modifier is applied to
 }

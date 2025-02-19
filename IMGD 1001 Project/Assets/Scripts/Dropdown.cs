@@ -10,6 +10,7 @@ public class Dropdown : MonoBehaviour
     private void Awake()
     {
         dropdown = GetComponent<TMP_Dropdown>();
+        Debug.Log("Dropdown set to " + dropdown);
     }
 
     //Get the selected option from the dropdown

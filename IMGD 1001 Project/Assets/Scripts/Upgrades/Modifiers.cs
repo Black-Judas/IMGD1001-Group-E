@@ -8,9 +8,6 @@ using UnityEngine;
 [System.Serializable]
 public abstract class Modifier : Upgrade
 {
-    protected Paddle player; // The player that the modifier is applied to
-    public void SetPlayer(Paddle player) { this.player = player; } // Set the player that the modifier is applied to
-
     //Stack handling
     public int stacks { get; protected set; } = 1; // The number of times the modifier has been applied to the player
     public int GetStacks() { return this.stacks; }
