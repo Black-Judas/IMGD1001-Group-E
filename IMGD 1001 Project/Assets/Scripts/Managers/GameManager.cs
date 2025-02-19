@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public Text playerScoreText, computerScoreText;
     public TMP_Text countdownText;
 
+    public GameObject debugMenu;
+
     public float countdownSeconds = 3f;
 
     private int _playerScore;
@@ -22,19 +24,35 @@ public class GameManager : MonoBehaviour
 
     private Coroutine _coroutine;
 
+    //Default methods
     private void Start()
     {
+        ToggleDebugMenu();
         _coroutine = StartCoroutine(StartRound(countdownSeconds));
     }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("Main Menu");
         }
+
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            ToggleDebugMenu();
+        }
     }
 
+
+    //Debug methods
+    public void ToggleDebugMenu() //Toggle the debug menu
+    {
+        Debug.Log("Debug toggled");
+        debugMenu.SetActive(!debugMenu.activeSelf);
+    }
+
+
+    //Game methods
     public void PlayerScores()
     {
         _playerScore++;
@@ -42,7 +60,6 @@ public class GameManager : MonoBehaviour
 
         ResetRound();
     }
-
     public void ComputerScores()
     {
         _computerScore++;
@@ -50,7 +67,6 @@ public class GameManager : MonoBehaviour
 
         ResetRound();
     }
-
     private void ResetRound()
     {
         this.playerPaddle.ResetPosition();

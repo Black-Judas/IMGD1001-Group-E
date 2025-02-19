@@ -3,18 +3,26 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+// Modifiers are upgrades that have passive effects and can be stacked
 [System.Serializable]
-//Modifiers are upgrades that have passive effects and can be stacked
 public abstract class Modifier : Upgrade
 {
-    public int stacks { get; protected set; } = 1; //The number of times the modifier has been applied to the player
+    protected Paddle player; // The player that the modifier is applied to
+    public void SetPlayer(Paddle player) { this.player = player; } // Set the player that the modifier is applied to
 
-    public int getStacks() { return stacks; }
-    public void addStack() { stacks += 1; }
+    //Stack handling
+    public int stacks { get; protected set; } = 1; // The number of times the modifier has been applied to the player
+    public int GetStacks() { return this.stacks; }
+    public void SetStacks(int i) { this.stacks = i; OnApply(); }
+    public void AddStack(int i = 1) { this.stacks += i; OnApply(); }
+    public void ClearStacks() { this.stacks = 0; OnApply(); }
 
-    public virtual void OnApply(Paddle player) { } //Use if the modifier has some kind of affect when it is applied
-    public virtual void StatChange(Paddle player) { } //Use if the modifier changes a player's stats in some way
-    public virtual void OnBallHit(Ball ball) { } //Use if the modifier has some kind of affect when the player hits the ball
+    //Methods
+    public virtual void OnApply() { } // Use if the modifier has some kind of affect when it is applied
+    public virtual void OnRemove() { } // Use if the modifier has some kind of affect when it is removed
+    public virtual void StatChange() { } // Use if the modifier changes a player's stats in some way
+    public virtual void OnBallHit(Ball ball) { } // Use if the modifier has some kind of affect when the player hits the ball
 
 }
 
@@ -28,26 +36,69 @@ public class ModifierPanel
     public ModifierPanel(Modifier modifier)
     {
         this.modifier = modifier;
-        name = modifier.Name;
-        stacks = modifier.getStacks();
+        this.name = modifier.Name;
+        this.stacks = modifier.stacks;
     }
 }
 
 [System.Serializable]
 public class SpeedBuff : Modifier
 {
-
+    // Properties
     [property:SerializeField] public override string Name{get{return "Speed Up!";}}
     public override string Description { get { return "Increase your paddle's move speed"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } //TODO: ADD IMAGE
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
-    public override void OnApply(Paddle player)
-    {
-        StatChange(player);
-    }
-    public override void StatChange(Paddle player)
-    {
-        player.statHandler.SetStat(player, "speed", player.statHandler.GetBaseStats(player).GetStat("speed") + 3 + (2 * stacks)); //Increase the player's speed by 3 + 2 * stacks
-    }
 
+
+    public override void OnApply()
+    {
+        StatChange();
+    }
+    public override void OnRemove()
+    {
+        StatChange();
+    }
+    public override void StatChange()
+    {
+        if (this.stacks != 0)
+        {
+            this.player.statHandler.SetStat(this.player, "speed", this.player.statHandler.baseSpeed + 3 + (2 * this.stacks)); // Set the player's speed to 3 + 2 * stacks
+        }
+        else
+        {
+            this.player.statHandler.SetStat(this.player, "speed", this.player.statHandler.baseSpeed); // Set the player's speed to the base speed
+        }
+    }
+}
+
+[System.Serializable]
+public class SizeBuff : Modifier
+{
+    // Properties
+    [property: SerializeField] public override string Name { get { return "Grow"; } }
+    public override string Description { get { return "Increase the length of your paddle to cover more ground"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
+
+
+    public override void OnApply()
+    {
+        StatChange();
+    }
+    public override void OnRemove()
+    {
+        StatChange();
+    }
+    public override void StatChange()
+    {
+        if (this.stacks != 0)
+        {
+            this.player.statHandler.SetStat(this.player, "size", this.player.statHandler.baseSize * 1.2f + (0.1f * this.stacks)); // Set the player's speed to 3 + 2 * stacks
+        }
+        else
+        {
+            this.player.statHandler.SetStat(this.player, "size", this.player.statHandler.baseSize); // Set the player's speed to the base speed
+        }
+    }
 }
