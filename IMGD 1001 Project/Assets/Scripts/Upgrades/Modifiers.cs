@@ -99,3 +99,18 @@ public class SizeBuff : Modifier
         }
     }
 }
+
+[System.Serializable]
+public class RedBall : Modifier
+{
+    // Properties
+    [property: SerializeField] public override string Name { get { return "Red Ball"; } }
+    public override string Description { get { return "Turns the ball red when you hit it"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
+
+    public override void OnBallHit(Ball ball)
+    {
+        ball.GetComponent<SpriteRenderer>().color = Color.red;
+    }
+}

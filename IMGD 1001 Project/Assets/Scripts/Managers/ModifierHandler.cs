@@ -19,6 +19,7 @@ public class ModifierHandler : MonoBehaviour
         //Add all modifiers to the list
         modifierList.Add(new SpeedBuff());
         modifierList.Add(new SizeBuff());
+        modifierList.Add(new RedBall());
 
         //Clear the dropdown and add all modifiers from the list to it
         Debug.Log("Adding modifiers to "+modifierDropdown);
