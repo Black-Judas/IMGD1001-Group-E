@@ -6,10 +6,10 @@ using UnityEngine;
 public class StatHandler : MonoBehaviour
 {
     public Dictionary<Paddle, StatsList> playerStats = new Dictionary<Paddle, StatsList>(); //Dictionary of player stats
-    public Dictionary<Paddle, StatsList> baseStats = new Dictionary<Paddle, StatsList>(); //Dictionary of base stats
 
     //Base stats
-    public float baseSpeed = 10f;
+    public readonly float baseSpeed = 10f;
+    public readonly float baseSize = 0.8f;
 
     private void Awake()
     {
@@ -19,16 +19,13 @@ public class StatHandler : MonoBehaviour
         }
     }
 
-    private void AddPlayer(Paddle player)
+    private void AddPlayer(Paddle player) //Add a new player to the dictionary with base stats
     {
-        playerStats.Add(player, new StatsList()); //Add the player to the dictionary
+        playerStats.Add(player, new StatsList()); 
 
         //Add the base stats to the player
         playerStats[player].AddStat("speed", baseSpeed);
-        playerStats[player].AddStat("size", player.transform.localScale.y);
-
-        //Add the base stats to the base stats dictionary
-        baseStats.Add(player, playerStats[player]);
+        playerStats[player].AddStat("size", baseSize);
     }
 
     public StatsList GetStats(Paddle player)
@@ -41,18 +38,6 @@ public class StatHandler : MonoBehaviour
         {
             AddPlayer(player);
             return playerStats[player];
-        }
-    }
-    public StatsList GetBaseStats(Paddle player)
-    {
-        if (baseStats.ContainsKey(player)) //Return the base stats of the player if they're in the dictionary
-        {
-            return baseStats[player];
-        }
-        else //Otherwise, add them to the dictionary and return their base stats
-        {
-            AddPlayer(player);
-            return baseStats[player];
         }
     }
 
@@ -69,8 +54,7 @@ public class StatHandler : MonoBehaviour
         StartCoroutine(UpdateStats());
     }
 
-    //Update the stats of all players every 0.2 seconds
-    IEnumerator UpdateStats()
+    IEnumerator UpdateStats() //Update the stats of all players every 0.2 seconds
     {
         while (true)
         {
