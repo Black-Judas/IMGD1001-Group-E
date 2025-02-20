@@ -5,6 +5,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public float speed = 200f;
+    public bool hasBeenHit = false; // sees if the ball has been hit this point
 
     public enum speedTier {
         Slow,
@@ -66,13 +67,28 @@ public class Ball : MonoBehaviour
 
     public void ResetPosition()
     {
+        hasBeenHit = false;
         _rigidbody.position = Vector3.zero;
         _rigidbody.velocity = Vector3.zero;
+
+        //Set transparency back to 1
+        Color color = _spriteRenderer.color;
+        color.a = 1;
+        _spriteRenderer.color = color;
+
+        //Set size back to .25
+        transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
     }
 
     public Vector2 GetVelocity()
     {
         return _rigidbody.velocity;
+    }
+
+    public Vector2 GetPosition()
+    {
+        return _rigidbody.position;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

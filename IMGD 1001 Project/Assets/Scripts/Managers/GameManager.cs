@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ToggleDebugMenu();
-
         StartCoroutine(StartRound(countdownSeconds));
     }
     private void Update()
