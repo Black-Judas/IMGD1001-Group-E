@@ -13,7 +13,8 @@ public abstract class Upgrade
         Uncommon,
         Rare,
         Epic,
-        Legendary
+        Legendary,
+        Devolper // new rarity for dev stuff, not to be added to real game
     }
     public abstract upgradeRarities Rarity { get; } //The rarity level of the upgrade
 

@@ -12,7 +12,7 @@ public class PlayerPaddle : Paddle
     public KeyCode moveDown = KeyCode.S;
 
     public bool debugMode = false;
-    public Ball ball;
+
 
 
     private void Update()
@@ -32,7 +32,7 @@ public class PlayerPaddle : Paddle
 
         if (debugMode == true)
         {
-            transform.position = new Vector3(transform.position.x, ball.transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
 
         //Update the player's y scale based on their scale stat
@@ -43,6 +43,11 @@ public class PlayerPaddle : Paddle
         foreach (Stat stat in stats.stats)
         {
             currentStats.Add(stat._name.FirstCharacterToUpper() + ": " + stat._value);
+        }
+        foreach (Modifier modifier in modifiers)
+        {
+
+            modifier.OnUpdate(this.ball);
         }
 
     }

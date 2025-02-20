@@ -8,7 +8,8 @@ public abstract class Paddle : MonoBehaviour
     public List<Modifier> modifiers = new List<Modifier>();
     public List<ModifierPanel> activeModifiers = new List<ModifierPanel>();
     private Paddle enemyPaddle;
- 
+
+    public Ball ball;
 
     public StatsList stats { get; protected set; }
     public List<string> currentStats;
@@ -35,6 +36,8 @@ public abstract class Paddle : MonoBehaviour
                 break;
             }
         }
+        Ball[] balls = FindObjectsOfType<Ball>(); ;
+        ball = balls[0];
 
         //Initialize the player's stats
         stats = statHandler.GetStats(this);
@@ -58,6 +61,12 @@ public abstract class Paddle : MonoBehaviour
     {
         _rigidbody.position = new Vector2(_rigidbody.position.x, 0.0f);
         _rigidbody.velocity = Vector2.zero;
+        
+        foreach (Modifier modifier in modifiers)
+        {
+
+            modifier.OnReset(ball);
+        }
     }
 
     private void OnCollisionEnter2D (Collision2D collision)
@@ -74,6 +83,7 @@ public abstract class Paddle : MonoBehaviour
 
     private void OnBallHit(Ball ball)
     {
+        
         BallImpactSound(ball);
         enemyPaddle.OnEnemyBallHit(ball);
 
@@ -82,6 +92,7 @@ public abstract class Paddle : MonoBehaviour
             
             modifier.OnBallHit(ball);
         }
+        ball.hasBeenHit = true;
     }
 
     private void OnEnemyBallHit(Ball ball)
