@@ -20,6 +20,7 @@ public class ModifierHandler : MonoBehaviour
         modifierList.Add(new SpeedBuff());
         modifierList.Add(new SizeBuff());
         modifierList.Add(new RedBall());
+        modifierList.Add(new Speedball());
 
         //Clear the dropdown and add all modifiers from the list to it
         Debug.Log("Adding modifiers to "+modifierDropdown);
@@ -34,10 +35,12 @@ public class ModifierHandler : MonoBehaviour
     public void DebugAddModifier()
     {
         //Add the modifier that's selected in the dropdown to all players
-        foreach (Paddle player in FindObjectsOfType<Paddle>())
-        {
-            AddModifier(player, FindModifierByName(modifierDropdown.GetSelectedOption()));
-        }
+        Paddle[] player = FindObjectsOfType<Paddle>();
+        //changed to only aplly the modifier to one player, for testing purposes
+        // foreach (Paddle player in FindObjectsOfType<Paddle>())
+        // {
+        AddModifier(player[0], FindModifierByName(modifierDropdown.GetSelectedOption()));
+       // }
         //Send an error message if the modifier doesn't exist
         if (FindModifierByName(modifierDropdown.GetSelectedOption()) == null)
         {

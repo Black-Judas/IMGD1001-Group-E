@@ -20,6 +20,7 @@ public abstract class Modifier : Upgrade
     public virtual void OnRemove() { } // Use if the modifier has some kind of affect when it is removed
     public virtual void StatChange() { } // Use if the modifier changes a player's stats in some way
     public virtual void OnBallHit(Ball ball) { } // Use if the modifier has some kind of affect when the player hits the ball
+    public virtual void OnEnemyBallHit(Ball ball) { } // USe if the modifer has effect when the other player hits the ball
 
 }
 
@@ -113,4 +114,40 @@ public class RedBall : Modifier
     {
         ball.GetComponent<SpriteRenderer>().color = Color.red;
     }
+}
+
+public class Speedball : Modifier
+{
+    // Properties
+    [property: SerializeField] public override string Name { get { return "Speed Ball"; } }
+    public override string Description { get { return "Speeds ball up extra when you hit it"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
+
+    public override void OnBallHit(Ball ball)
+    {
+        int force = (this.stacks * 1) + 2;
+        Vector2 velo = ball.GetVelocity();
+
+
+        if (velo[0] > 0)
+        {
+            ball.AddForce(new Vector2(force, 0));
+        }
+        else
+        {
+            ball.AddForce(new Vector2(-force, 0));
+            
+        }
+
+
+        
+    }
+
+    public override void OnApply()
+    {
+        StatChange();
+    }
+
+
 }
