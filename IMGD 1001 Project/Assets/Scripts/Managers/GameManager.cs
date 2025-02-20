@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     public GameObject debugMenu;
 
     public float countdownSeconds = 3f;
-
+   
+    //public int ballPaddleHitcount;
     private int _playerScore;
     private int _computerScore;
 
@@ -27,7 +28,9 @@ public class GameManager : MonoBehaviour
     //Default methods
     private void Start()
     {
+
         ToggleDebugMenu();
+       
         _coroutine = StartCoroutine(StartRound(countdownSeconds));
     }
     private void Update()

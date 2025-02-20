@@ -7,7 +7,9 @@ public abstract class Paddle : MonoBehaviour
 
     public List<Modifier> modifiers = new List<Modifier>();
     public List<ModifierPanel> activeModifiers = new List<ModifierPanel>();
+    private Paddle enemyPaddle;
 
+    public Ball ball;
 
     public StatsList stats { get; protected set; }
     public List<string> currentStats;
@@ -22,6 +24,20 @@ public abstract class Paddle : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         statHandler = FindObjectOfType<StatHandler>();
         modifierHandler = FindObjectOfType<ModifierHandler>();
+
+        //sets the other paddle to enemyPaddle, for later use.
+        Paddle[] paddlelist;
+        paddlelist = FindObjectsOfType<Paddle>();
+        for (int i = 0; i < paddlelist.Length; i++)
+        {
+            if(paddlelist[i] != this)
+            {
+                enemyPaddle = paddlelist[i];
+                break;
+            }
+        }
+
+        ball = FindObjectOfType<Ball>();
 
         //Initialize the player's stats
         stats = statHandler.GetStats(this);
@@ -45,6 +61,12 @@ public abstract class Paddle : MonoBehaviour
     {
         _rigidbody.position = new Vector2(_rigidbody.position.x, 0.0f);
         _rigidbody.velocity = Vector2.zero;
+        
+        foreach (Modifier modifier in modifiers)
+        {
+
+            modifier.OnReset(ball);
+        }
     }
 
     private void OnCollisionEnter2D (Collision2D collision)
@@ -53,6 +75,7 @@ public abstract class Paddle : MonoBehaviour
 
         if (ball != null)
         {
+            
             OnBallHit(ball);
         }
 
@@ -60,10 +83,24 @@ public abstract class Paddle : MonoBehaviour
 
     private void OnBallHit(Ball ball)
     {
+        
         BallImpactSound(ball);
+        enemyPaddle.OnEnemyBallHit(ball);
+
         foreach (Modifier modifier in modifiers)
         {
+            
             modifier.OnBallHit(ball);
+        }
+        ball.hasBeenHit = true;
+    }
+
+    private void OnEnemyBallHit(Ball ball)
+    {
+        foreach (Modifier modifier in modifiers)
+        {
+
+            modifier.OnEnemyBallHit(ball);
         }
     }
 

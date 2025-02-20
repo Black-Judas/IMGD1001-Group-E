@@ -981,11 +981,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeModifiers: []
+  ball: {fileID: 0}
   currentStats: []
   moveUp: 273
   moveDown: 274
   debugMode: 0
-  ball: {fileID: 503052209}
 --- !u!70 &460926359
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1410,6 +1410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  hasBeenHit: 0
   impactParticles: {fileID: 2627413562416288649, guid: f0fe317ce19dce745a3476aac40a38b7, type: 3}
 --- !u!1 &519420028
 GameObject:
@@ -3249,11 +3250,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeModifiers: []
+  ball: {fileID: 0}
   currentStats: []
   moveUp: 119
   moveDown: 115
   debugMode: 0
-  ball: {fileID: 503052209}
 --- !u!114 &1643729401
 MonoBehaviour:
   m_ObjectHideFlags: 0
