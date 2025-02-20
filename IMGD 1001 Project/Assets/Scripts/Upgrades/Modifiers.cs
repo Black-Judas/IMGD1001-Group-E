@@ -35,21 +35,24 @@ public class ModifierPanel
 {
     public Modifier modifier;
     public string name;
+    public string description;
     public int stacks;
 
     public ModifierPanel(Modifier modifier)
     {
         this.modifier = modifier;
         this.name = modifier.Name;
+        this.description = modifier.Description;
         this.stacks = modifier.stacks;
     }
 }
+
 
 [System.Serializable]
 public class SpeedBuff : Modifier
 {
     // Properties
-    [property:SerializeField] public override string Name{get{return "Speed Up!";}}
+    public override string Name{get{return "Speed Up!";}}
     public override string Description { get { return "Increase your paddle's move speed"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
@@ -76,11 +79,12 @@ public class SpeedBuff : Modifier
     }
 }
 
+
 [System.Serializable]
 public class SizeBuff : Modifier
 {
     // Properties
-    [property: SerializeField] public override string Name { get { return "Grow"; } }
+    public override string Name { get { return "Grow"; } }
     public override string Description { get { return "Increase the length of your paddle to cover more ground"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
@@ -107,14 +111,15 @@ public class SizeBuff : Modifier
     }
 }
 
+
 [System.Serializable]
 public class RedBallBlueBall : Modifier
 {
     // Properties
-    [property: SerializeField] public override string Name { get { return "Red Ball Blue Ball"; } }
-    public override string Description { get { return "Turns the ball red when you hit it, and the ball blue when your oppenthits it"; } }
+    public override string Name { get { return "Red Ball, Blue Ball"; } }
+    public override string Description { get { return "Turns the ball red when you hit it and blue when your opponent hits it"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
-    public override upgradeRarities Rarity { get { return upgradeRarities.Devolper; } }
+    public override upgradeRarities Rarity { get { return upgradeRarities.Developer; } }
 
     public override void OnBallHit(Ball ball)
     {
@@ -128,18 +133,14 @@ public class RedBallBlueBall : Modifier
 }
 
 
-
-
-
-
+[System.Serializable]
 public class SpeedBall : Modifier
 {
     // Properties
-    [property: SerializeField] public override string Name { get { return "SpeedBall"; } }
+    public override string Name { get { return "Speed Ball"; } }
     public override string Description { get { return "Speeds ball up until your oppent hits it"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
-
 
 
     public override void OnBallHit(Ball ball)
@@ -178,30 +179,30 @@ public class SpeedBall : Modifier
         }
     }
 
-
 }
 
 
+[System.Serializable]
 public class Gamble : Modifier
 {
     // Properties
-    [property: SerializeField] public override string Name { get { return "Gamble"; } }
+    public override string Name { get { return "Let's Go Gambling!!"; } }
     public override string Description { get { return "Small chance for ball to get a crazy boost on hit"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
 
 
-     bool gamble = false;
+    bool gamble = false;
     public override void OnBallHit(Ball ball)
     {
 
         if (Random.value <= (0.1 + this.stacks * 0.5))
         {
-             gamble = true;
+            gamble = true;
             Vector2 velo = ball.GetVelocity();
             int force = (this.stacks * 5) + 50;
 
-            if (velo[0] > 0)
+            if (velo.x > 0)
             {
                 ball.AddForce(new Vector2(force, 0));
             }
@@ -214,7 +215,6 @@ public class Gamble : Modifier
 
     }
 
-
     public override void OnEnemyBallHit(Ball ball)
     {
         if (ball.hasBeenHit)
@@ -225,7 +225,7 @@ public class Gamble : Modifier
                 Vector2 velo = ball.GetVelocity();
                 int force = -((this.stacks * 10) + 50);
 
-                if (velo[0] > 0)
+                if (velo.x > 0)
                 {
                     ball.AddForce(new Vector2(force, 0));
                 }
@@ -238,24 +238,22 @@ public class Gamble : Modifier
         }
     }
 
-
     public override void OnReset(Ball ball)
     {
         gamble = false;
     }
 
-
 }
 
 
+[System.Serializable]
 public class Invisiball : Modifier
 {
     // Properties
-    [property: SerializeField] public override string Name { get { return "Invisiball"; } }
-    public override string Description { get { return "Turn the ball a random amount of transulence for a small distane "; } }
+    public override string Name { get { return "Invisiball"; } }
+    public override string Description { get { return "Turn the ball translucent on hit"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
-
 
 
     public override void OnBallHit(Ball ball)
@@ -296,28 +294,28 @@ public class Invisiball : Modifier
 
     }
 
-
-
 }
 
 
-public class FastPitch : Modifier
+[System.Serializable]
+public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECTION HALF WAY THROUGH THE PITCH - Eric
 {
     // Properties
-    [property: SerializeField] public override string Name { get { return "FastPitch"; } }
-    public override string Description { get { return "The ball moves Lickity Split until it reaches the middle "; } }
+    public override string Name { get { return "Fast Pitch"; } }
+    public override string Description { get { return "The ball moves Lickity Split until it reaches the middle"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
 
-    bool sloweddown = true;
+    bool isSlowedDown = true;
 
     int playerNumber = 0;
+
 
     public override void OnBallHit(Ball ball)
     {
         Vector2 velo = ball.GetVelocity();
         int force = (this.stacks * 10) + 50;
-        sloweddown = false;
+        isSlowedDown = false;
 
         if (ball.transform.position.x < 0)
         {
@@ -343,50 +341,44 @@ public class FastPitch : Modifier
 
         if (playerNumber == 2)
         {
-            if (ballpos[0] < 0)
+
+            if (ballpos.x < 0 && isSlowedDown == false)
             {
-                if (sloweddown == false)
-                {
-                  ball.AddForce(new Vector2(force, 0));
-                    sloweddown = true;
-                   
-                }
+                ball.AddForce(new Vector2(force, 0));
+                isSlowedDown = true;
+                
             }
+
         } else
         {
-            if (ballpos[0] > 0)
+
+            if (ballpos.x > 0 && isSlowedDown == false)
             {
-                if (sloweddown == false)
-                {
-                    ball.AddForce(new Vector2(-force, 0));
-                    sloweddown = true;
-                   
-                }
+                
+                ball.AddForce(new Vector2(-force, 0));
+                isSlowedDown = true;
+                
             }
+
         }
      }
 
 
     public override void OnReset(Ball ball)
     {
-        sloweddown = true;
-       
+        isSlowedDown = true;
     }
-
-
 
 }
 
 
-public class smallball : Modifier
+public class SmallBall : Modifier
 {
     // Properties
-    [property: SerializeField] public override string Name { get { return "smallball"; } }
-    public override string Description { get { return "Shrinks the balls size, but dont worry its just as deadly"; } }
+    public override string Name { get { return "Small Ball"; } }
+    public override string Description { get { return "Shrinks the ball's size until your opponent hits it"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
-
-
 
 
     public override void OnBallHit(Ball ball)
@@ -396,25 +388,20 @@ public class smallball : Modifier
         ballScale = ballScale * (0.75f - this.stacks * 0.05f); 
         ball.transform.localScale = ballScale;
 
+        // TODO: FIX BUG WHERE BALL VELOCITY STARTS TO GRADUALLY BECOME VERTICAL - Eric
+        //Vector2 velo = ball.GetVelocity();
+        //int force =  2;
 
+        //if (velo[0] > 0)
+        //{
+        //    ball.AddForce(new Vector2(-force, 0));
+        //}
+        //else
+        //{
+        //    ball.AddForce(new Vector2(force, 0));
 
-
-
-        Vector2 velo = ball.GetVelocity();
-        int force =  2;
-
-        if (velo[0] > 0)
-        {
-            ball.AddForce(new Vector2(-force, 0));
-        }
-        else
-        {
-            ball.AddForce(new Vector2(force, 0));
-
-        }
+        //}
     }
-
-    
 
     public override void OnEnemyBallHit(Ball ball)
     {
@@ -430,29 +417,23 @@ public class smallball : Modifier
 
     public override void OnReset(Ball ball)
     {
-   
         
             ball.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
- 
 
     }
-
 
 }
 
 
 
 
-public class bigball : Modifier
+public class BigBall : Modifier
 {
     // Properties
-    [property: SerializeField] public override string Name { get { return "bigball"; } }
-    public override string Description { get { return "makes the ball large when your enemy hits hit"; } }
+    public override string Name { get { return "Big Ball"; } }
+    public override string Description { get { return "Makes the ball larger when your opponent hits it"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
-
-
-
 
 
     public override void OnBallHit(Ball ball)
@@ -463,17 +444,11 @@ public class bigball : Modifier
             ballScale = ballScale / (1.5f + this.stacks * 0.15f);
             ball.transform.localScale = ballScale;
         }
-        
-
-
-
-
 
     }
 
     public override void OnEnemyBallHit(Ball ball)
     {
-
 
         Vector3 ballScale = ball.transform.localScale;
         ballScale = (ballScale * (1.5f+ this.stacks * 0.15f));
@@ -485,9 +460,7 @@ public class bigball : Modifier
     public override void OnReset(Ball ball)
     {
 
-
         ball.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-
 
     }
 

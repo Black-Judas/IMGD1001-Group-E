@@ -983,8 +983,8 @@ MonoBehaviour:
   activeModifiers: []
   ball: {fileID: 0}
   currentStats: []
-  moveUp: 111
-  moveDown: 108
+  moveUp: 273
+  moveDown: 274
   debugMode: 0
 --- !u!70 &460926359
 CapsuleCollider2D:

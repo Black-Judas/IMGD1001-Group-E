@@ -24,8 +24,8 @@ public class ModifierHandler : MonoBehaviour
         modifierList.Add(new Gamble());
         modifierList.Add(new Invisiball());
         modifierList.Add(new FastPitch());
-        modifierList.Add(new smallball());
-        modifierList.Add(new bigball());
+        modifierList.Add(new SmallBall());
+        modifierList.Add(new BigBall());
 
         //Clear the dropdown and add all modifiers from the list to it
         Debug.Log("Adding modifiers to "+modifierDropdown);

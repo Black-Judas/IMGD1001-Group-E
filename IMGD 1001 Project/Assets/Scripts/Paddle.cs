@@ -36,8 +36,8 @@ public abstract class Paddle : MonoBehaviour
                 break;
             }
         }
-        Ball[] balls = FindObjectsOfType<Ball>(); ;
-        ball = balls[0];
+
+        ball = FindObjectOfType<Ball>();
 
         //Initialize the player's stats
         stats = statHandler.GetStats(this);

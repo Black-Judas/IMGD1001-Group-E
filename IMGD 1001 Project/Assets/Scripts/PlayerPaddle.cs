@@ -32,7 +32,7 @@ public class PlayerPaddle : Paddle
 
         if (debugMode == true)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, ball.GetPosition().y, transform.position.z);
         }
 
         //Update the player's y scale based on their scale stat

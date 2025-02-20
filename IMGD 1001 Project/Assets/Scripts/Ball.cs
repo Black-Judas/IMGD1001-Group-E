@@ -70,6 +70,15 @@ public class Ball : MonoBehaviour
         hasBeenHit = false;
         _rigidbody.position = Vector3.zero;
         _rigidbody.velocity = Vector3.zero;
+
+        //Set transparency back to 1
+        Color color = _spriteRenderer.color;
+        color.a = 1;
+        _spriteRenderer.color = color;
+
+        //Set size back to .25
+        transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
     }
 
     public Vector2 GetVelocity()
