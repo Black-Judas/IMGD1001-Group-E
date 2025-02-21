@@ -424,8 +424,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.9459, y: 190.5}
-  m_SizeDelta: {x: 414.4312, y: 219}
+  m_AnchoredPosition: {x: 29.9459, y: 276.09998}
+  m_SizeDelta: {x: 688.8, y: 219}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &136264807
 MonoBehaviour:
@@ -1395,8 +1395,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 52.392822, y: 543}
-  m_SizeDelta: {x: 221.39, y: 100}
+  m_AnchoredPosition: {x: 107.1, y: 793.7}
+  m_SizeDelta: {x: 460, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1183344324
 MonoBehaviour:
@@ -1418,57 +1418,30 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<u><b>v0.0.1.0s1</b></u>
-
-    - Added main menu
-
-    - Added version notes
-
-    -
-    Added option to play original game from menu
-
-    - Made game 2 player
-
-    -
-    Player 1 now only controls with W and S keys
-
-    - Player 2 now controls with
-    up and down arrows
-
-
-    <u><b>v0.0.3.0s2</b></u>
-
-    - Added particle effects
-    on ball impact
-
-    - Added splash screens
-
-    - Added music and sound effects
-
-    -
-    Added controls to version notes screen
-
-
-
-    <u><b>v0.0.4.0s3</b></u>
-
-    -
-    Added game icon
-
-    - Changed shape of paddle
-
-    - Refined player controls,
-    giving a higher speed and faster deceleration
-
-    - Ball now starts faster and
-    can reach a much higher max speed
-
-    - Added a countdown before the ball is
-    served
-
-    - Improved audio for ball interactions
-
-'
+  m_text: "<u><b>v0.0.1.0s1</b></u>\n- Added main menu\n- Added version notes\n-
+    Added option to play original game from menu\n- Made game 2 player\n- Player
+    1 now only controls with W and S keys\n- Player 2 now controls with up and down
+    arrows\n\n<u><b>v0.0.3.0s2</b></u>\n- Added particle effects on ball impact\n-
+    Added splash screens\n- Added music and sound effects\n- Added controls to version
+    notes screen\n\n\n<u><b>v0.0.4.0s3</b></u>\n- Added game icon\n- Changed shape
+    of paddle\n- Refined player controls, giving a higher speed and faster deceleration\n-
+    Ball now starts faster and can reach a much higher max speed\n- Added a countdown
+    before the ball is served\n- Improved audio for ball interactions\n\n<u><b>v0.1.0.0s4:
+    The BIG One</b></u>\r\n- Implemented <b>the modifier system</b>\n\t- Each game
+    will now consist of multiple best of 3's\n\t- Round winner gets a point and the
+    loser gets to pick modifier from a random selection\n\t- First to 5 points wins\r\n-
+    Added Modifiers to go with it, all are subject to change\r\n- Added  SpeedBuff
+    Modifier, which increases paddle speed\r\n- Added SizeBuff Modifier, which increases
+    paddle size\r\n- Added RedBallBlueBall Modifier, which changes the ball red when
+    you hit it and blue when your openent does, for dev testing\r\n- Added SpeedBall
+    Modifier, which allows you to  hit with more power\r\n- Added Gamble Modifier,
+    which gives you a small chance to hit with a LOT more power\r\n- Added Invisiball
+    Modifier, which turns the ball translucent on hit and and it slowly fades back
+    in\r\n- Added FastPitch Modifier, which increase ball speed drastically on hit
+    until it passes the middle line\r\n- Added smallball Modifier, which decreases
+    ball size on hit until your opponent hits it\r\n- Added bigball Modifier, which
+    makes the ball increase in size when your oppenet hits it until you hit it\r\n-
+    Added crowd cheer effect when a player scores\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1495,8 +1468,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1593,7 +1566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 70.87}
+  m_AnchoredPosition: {x: 0, y: 156.46997}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367483756
@@ -1646,8 +1619,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
-  m_fontSizeBase: 26
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
