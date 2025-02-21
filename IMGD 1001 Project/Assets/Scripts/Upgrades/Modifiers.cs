@@ -21,7 +21,7 @@ public abstract class Modifier : Upgrade
     public virtual void OnRemove() { } // Use if the modifier has some kind of affect when it is removed
     public virtual void StatChange() { } // Use if the modifier changes a player's stats in some way
     public virtual void OnBallHit(Ball ball) { } // Use if the modifier has some kind of affect when the player hits the ball
-    public virtual void OnEnemyBallHit(Ball ball) { } // USe if the modifer has effect when the other player hits the ball
+    public virtual void OnOpponentBallHit(Ball ball) { } // USe if the modifer has effect when the other player hits the ball
 
     public virtual void OnReset(Ball ball) { } // Use if on start of point you want smthn to happen
 
@@ -126,7 +126,7 @@ public class RedBallBlueBall : Modifier
         ball.GetComponent<SpriteRenderer>().color = Color.red;
     }
 
-    public override void OnEnemyBallHit(Ball ball)
+    public override void OnOpponentBallHit(Ball ball)
     {
         ball.GetComponent<SpriteRenderer>().color = Color.blue;
     }
@@ -160,7 +160,7 @@ public class SpeedBall : Modifier
         }
     }
 
-    public override void OnEnemyBallHit(Ball ball)
+    public override void OnOpponentBallHit(Ball ball)
     {
         if (ball.hasBeenHit)
         {
@@ -215,7 +215,7 @@ public class Gamble : Modifier
 
     }
 
-    public override void OnEnemyBallHit(Ball ball)
+    public override void OnOpponentBallHit(Ball ball)
     {
         if (ball.hasBeenHit)
         {
@@ -286,7 +286,7 @@ public class Invisiball : Modifier
     }
 
 
-    public override void OnEnemyBallHit(Ball ball)
+    public override void OnOpponentBallHit(Ball ball)
     {
         Color ballColor = ball.GetComponent<SpriteRenderer>().color;
         ballColor.a = 1;
@@ -327,9 +327,6 @@ public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECT
             playerNumber = 2;
             ball.AddForce(new Vector2(-force, 0));
         }
-         
-        
- 
 
     }
 
@@ -403,7 +400,7 @@ public class SmallBall : Modifier
         //}
     }
 
-    public override void OnEnemyBallHit(Ball ball)
+    public override void OnOpponentBallHit(Ball ball)
     {
         if (ball.hasBeenHit)
         {
@@ -447,7 +444,7 @@ public class BigBall : Modifier
 
     }
 
-    public override void OnEnemyBallHit(Ball ball)
+    public override void OnOpponentBallHit(Ball ball)
     {
 
         Vector3 ballScale = ball.transform.localScale;
