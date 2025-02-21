@@ -35,7 +35,7 @@ public class ModifierHandler : MonoBehaviour
         }
     }
 
-    //Debug methods
+    //DEBUG METHODS
     public void DebugAddModifier()
     {
         //Add the modifier that's selected in the dropdown to all players
@@ -60,7 +60,7 @@ public class ModifierHandler : MonoBehaviour
         }
     }
 
-    //Utility methods
+    //UTILITY METHODS
     public Modifier FindModifierByName(string name)
     {
         //Find a modifier by its name
@@ -77,7 +77,14 @@ public class ModifierHandler : MonoBehaviour
         return null;
     }
 
+    public Modifier GetRandomModifier()
+    {
+        //Get a random modifier from the list
+        return modifierList[Random.Range(0, modifierList.Count)];
+    }
 
+
+    //MODIFIER HANDLING
     public void AddModifier(Paddle player, Modifier newModifier)
     {
 

@@ -12,8 +12,14 @@ public class ScoringZone : MonoBehaviour
 
         if (ball != null)
         {
+            //Destroy all balls on the screen
+            foreach (Ball b in FindObjectsOfType<Ball>())
+            {
+                Destroy(b.gameObject);
+            }
             BaseEventData eventData = new BaseEventData(EventSystem.current);
             this.scoreTrigger.Invoke(eventData);
+
         }
     }
 }

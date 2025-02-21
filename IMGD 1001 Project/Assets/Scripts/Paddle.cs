@@ -7,7 +7,7 @@ public abstract class Paddle : MonoBehaviour
 
     public List<Modifier> modifiers = new List<Modifier>();
     public List<ModifierPanel> activeModifiers = new List<ModifierPanel>();
-    private Paddle enemyPaddle;
+    private Paddle opponentPaddle;
 
     public Ball ball;
 
@@ -25,17 +25,16 @@ public abstract class Paddle : MonoBehaviour
         statHandler = FindObjectOfType<StatHandler>();
         modifierHandler = FindObjectOfType<ModifierHandler>();
 
-        //sets the other paddle to enemyPaddle, for later use.
-        Paddle[] paddlelist;
-        paddlelist = FindObjectsOfType<Paddle>();
-        for (int i = 0; i < paddlelist.Length; i++)
+        //Set opponentPaddle to the other paddle in the scene
+        Paddle[] paddles = FindObjectsOfType<Paddle>();
+        foreach (Paddle paddle in paddles)
         {
-            if(paddlelist[i] != this)
+            if (paddle != this)
             {
-                enemyPaddle = paddlelist[i];
-                break;
+                opponentPaddle = paddle;
             }
         }
+
 
         ball = FindObjectOfType<Ball>();
 
@@ -61,21 +60,15 @@ public abstract class Paddle : MonoBehaviour
     {
         _rigidbody.position = new Vector2(_rigidbody.position.x, 0.0f);
         _rigidbody.velocity = Vector2.zero;
-        
-        foreach (Modifier modifier in modifiers)
-        {
-
-            modifier.OnReset(ball);
-        }
     }
 
-    private void OnCollisionEnter2D (Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Ball ball = collision.gameObject.GetComponent<Ball>();
 
         if (ball != null)
         {
-            
+
             OnBallHit(ball);
         }
 
@@ -83,13 +76,13 @@ public abstract class Paddle : MonoBehaviour
 
     private void OnBallHit(Ball ball)
     {
-        
+
         BallImpactSound(ball);
-        enemyPaddle.OnEnemyBallHit(ball);
+        opponentPaddle.OnEnemyBallHit(ball);
 
         foreach (Modifier modifier in modifiers)
         {
-            
+
             modifier.OnBallHit(ball);
         }
         ball.hasBeenHit = true;
@@ -100,7 +93,7 @@ public abstract class Paddle : MonoBehaviour
         foreach (Modifier modifier in modifiers)
         {
 
-            modifier.OnEnemyBallHit(ball);
+            modifier.OnOpponentBallHit(ball);
         }
     }
 

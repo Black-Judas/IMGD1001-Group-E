@@ -17,6 +17,7 @@ public class PlayerPaddle : Paddle
 
     private void Update()
     {
+        ball = FindObjectOfType<Ball>();
         if (Input.GetKey(moveUp))
         {
             _direction = Vector2.up;
@@ -30,7 +31,7 @@ public class PlayerPaddle : Paddle
             _direction = Vector2.zero;
         }
 
-        if (debugMode == true)
+        if (debugMode == true && ball != null)
         {
             transform.position = new Vector3(transform.position.x, ball.GetPosition().y, transform.position.z);
         }
@@ -46,8 +47,7 @@ public class PlayerPaddle : Paddle
         }
         foreach (Modifier modifier in modifiers)
         {
-
-            modifier.OnUpdate(this.ball);
+            if (ball != null) modifier.OnUpdate(this.ball);
         }
 
     }

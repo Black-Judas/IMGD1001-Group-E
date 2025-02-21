@@ -8,32 +8,36 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Ball ball;
+    public Ball ballPrefab;
+    public int scoreToWin = 5;
+    public float countdownSeconds = 3f;
 
     //Player references
     public Paddle player1Paddle, player2Paddle;
     public Text player1MatchScoreText, player2MatchScoreText; //UI text for the player's match score
     private int _player1MatchScore, _player2MatchScore; //The player's match score
     public RoundScoreCounter player1RoundScoreCounter, player2RoundScoreCounter; //The players' round score counters
+    
 
     //General UI references
     public TMP_Text countdownText;
-    public float countdownSeconds = 3f;
     public GameObject debugMenu;
     public TMP_Text announcementText;
+    public UpgradeSelectionScreen upgradeSelectionScreen;
 
 
     //Unity methods
     private void Start()
     {
         ToggleDebugMenu();
-        StartCoroutine(StartRound(countdownSeconds));
+        upgradeSelectionScreen.gameObject.SetActive(false);
+        StartCoroutine(ServeBall(countdownSeconds));
     }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            SceneManager.LoadScene("Main Menu");
+            GoToMainMenu();
         }
 
         if (Input.GetKeyDown(KeyCode.BackQuote))
@@ -47,6 +51,12 @@ public class GameManager : MonoBehaviour
     {
         //Debug.Log("Debug toggled");
         debugMenu.SetActive(!debugMenu.activeSelf);
+    }
+
+    //Go to the main menu
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 
 
@@ -63,15 +73,13 @@ public class GameManager : MonoBehaviour
         {
             _player1MatchScore++;
             player1MatchScoreText.text = _player1MatchScore.ToString();
-            player1RoundScoreCounter.ResetScore();
-            player2RoundScoreCounter.ResetScore();
 
-            StartCoroutine(RoundWon(player1Paddle));
+            StartCoroutine(RoundWon(player1Paddle, player2Paddle));
         }
         else
         {
             ResetPlayArea();
-            StartCoroutine(StartRound(countdownSeconds));
+            StartCoroutine(ServeBall(countdownSeconds));
         }
 
     }
@@ -87,16 +95,13 @@ public class GameManager : MonoBehaviour
         {
             _player2MatchScore++;
             player2MatchScoreText.text = _player2MatchScore.ToString();
-            player1RoundScoreCounter.ResetScore();
-            player2RoundScoreCounter.ResetScore();
 
-
-            StartCoroutine(RoundWon(player2Paddle));
+            StartCoroutine(RoundWon(player2Paddle, player1Paddle));
         }
         else
         {
             ResetPlayArea();
-            StartCoroutine(StartRound(countdownSeconds));
+            StartCoroutine(ServeBall(countdownSeconds));
         }
 
     }
@@ -105,7 +110,6 @@ public class GameManager : MonoBehaviour
 
         this.player1Paddle.ResetPosition();
         this.player2Paddle.ResetPosition();
-        this.ball.ResetPosition();
 
     }
     
@@ -118,25 +122,71 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         announcementText.enabled = false;
     }
-    IEnumerator RoundWon(Paddle player)
+    IEnumerator RoundWon(Paddle winner, Paddle loser)
     {
-        //Announce the winner
         Coroutine coroutine;
-        coroutine = StartCoroutine(Announce(player.gameObject.name + " wins the round!", 3f));
+        bool matchWon = false;
 
-        //TODO: Add in the modifier selection screen here
+        //If a player has won the match, announce it and reset the match score. Otherwise, announce the round winner
+        if (_player1MatchScore >= scoreToWin)
+        {
+            coroutine = StartCoroutine(Announce("Player 1 wins the match!"));
+            _player1MatchScore = 0;
+            _player2MatchScore = 0;
+            player1MatchScoreText.text = _player1MatchScore.ToString();
+            player2MatchScoreText.text = _player2MatchScore.ToString();
+            matchWon = true;
+        }
+        else if (_player2MatchScore >= scoreToWin)
+        {
+            coroutine = StartCoroutine(Announce("Player 2 wins the match!"));
+            _player1MatchScore = 0;
+            _player2MatchScore = 0;
+            player1MatchScoreText.text = _player1MatchScore.ToString();
+            player2MatchScoreText.text = _player2MatchScore.ToString();
+            matchWon = true;
+        }
+        else
+        {
+            coroutine = StartCoroutine(Announce(winner.gameObject.name + " wins the round!"));
+        }
 
-        ResetPlayArea();
 
-        //Start the next round after the announcement finishes
+        //Start the upgrade selection screen after the announcement finishes, unless the match has been won
         yield return coroutine;
-        StartCoroutine(StartRound(countdownSeconds));
+        if (matchWon)
+        {
+            GoToMainMenu();
+            yield break;
+        }
+        ResetPlayArea();
+        upgradeSelectionScreen.StartPicking(loser);
+
+        //Wait until the player has selected their upgrade before continuing
+        yield return new WaitUntil(() => upgradeSelectionScreen.gameObject.activeSelf == false);
+
+        //Start the next round
+        player1RoundScoreCounter.ResetScore();
+        player2RoundScoreCounter.ResetScore();
+        StartCoroutine(ServeBall(countdownSeconds));
 
     }
-    IEnumerator StartRound(float countdownSeconds)
+    public IEnumerator ServeBall(float countdownSeconds)
     {
+        Ball ball = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
 
-        //Debug.Log("Starting Round");
+        //Call the OnReset method for every modifier on both players
+        foreach (Modifier modifier in player1Paddle.modifiers)
+        {
+            modifier.OnReset(ball);
+        }
+        foreach (Modifier modifier in player2Paddle.modifiers)
+        {
+            modifier.OnReset(ball);
+        }
+
+
+        Debug.Log("Starting countdown");
         countdownText.enabled = true;
         float currentSecond = math.ceil(countdownSeconds);
 
@@ -160,7 +210,9 @@ public class GameManager : MonoBehaviour
         }
         countdownText.enabled = false;
         AudioManager.instance.PlaySFX("ballLaunch");
-        this.ball.AddStartingForce();
+
+        Debug.Log("Serving ball");
+        ball.AddStartingForce();
 
     }
 }
