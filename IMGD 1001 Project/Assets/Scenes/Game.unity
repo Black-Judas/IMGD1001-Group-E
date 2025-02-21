@@ -189,6 +189,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f53ac5764959de14bbe41a9992cfb5dc, type: 3}
   - name: ballLaunch
     clip: {fileID: 8300000, guid: 5ec26e6aa6578d94ebf185314e1d2980, type: 3}
+  - name: crowd
+    clip: {fileID: 8300000, guid: 650f62f0a711c54419e3dcdea33ef226, type: 3}
+  - name: crowdLong
+    clip: {fileID: 8300000, guid: 915acc0d22d507042acd3b3956b2ffdb, type: 3}
   musicSource: {fileID: 1552660377}
   sfxSource: {fileID: 1243468804}
 --- !u!4 &26265531
@@ -4332,6 +4336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 7458984061545864169, guid: e7f5f3064d06449409bee930014fe8d6, type: 3}
+  scoreToWin: 5
+  countdownSeconds: 3
   player1Paddle: {fileID: 1643729400}
   player2Paddle: {fileID: 460926358}
   player1MatchScoreText: {fileID: 1439029301}
@@ -4339,7 +4345,6 @@ MonoBehaviour:
   player1RoundScoreCounter: {fileID: 407738397}
   player2RoundScoreCounter: {fileID: 660223851}
   countdownText: {fileID: 329684857}
-  countdownSeconds: 3
   debugMenu: {fileID: 1656086396}
   announcementText: {fileID: 1011102539}
   upgradeSelectionScreen: {fileID: 410218698}

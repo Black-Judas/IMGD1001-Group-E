@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     {
 
         Debug.Log("Player 1 Scores");
+        AudioManager.instance.PlaySFX("crowd");
 
         player1RoundScoreCounter.IncrementScore();
 
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
     {
 
         Debug.Log("Player 2 Scores");
+        AudioManager.instance.PlaySFX("crowd", 1.5f);
 
         player2RoundScoreCounter.IncrementScore();
 
@@ -122,6 +124,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         announcementText.enabled = false;
     }
+
     IEnumerator RoundWon(Paddle winner, Paddle loser)
     {
         Coroutine coroutine;
@@ -130,7 +133,8 @@ public class GameManager : MonoBehaviour
         //If a player has won the match, announce it and reset the match score. Otherwise, announce the round winner
         if (_player1MatchScore >= scoreToWin)
         {
-            coroutine = StartCoroutine(Announce("Player 1 wins the match!"));
+            AudioManager.instance.PlaySFX("crowdLong", 1.5f);
+            coroutine = StartCoroutine(Announce("Player 1 wins the match!", 6));
             _player1MatchScore = 0;
             _player2MatchScore = 0;
             player1MatchScoreText.text = _player1MatchScore.ToString();
@@ -139,6 +143,7 @@ public class GameManager : MonoBehaviour
         }
         else if (_player2MatchScore >= scoreToWin)
         {
+            AudioManager.instance.PlaySFX("crowdLong", 1.5f);
             coroutine = StartCoroutine(Announce("Player 2 wins the match!"));
             _player1MatchScore = 0;
             _player2MatchScore = 0;
@@ -150,7 +155,6 @@ public class GameManager : MonoBehaviour
         {
             coroutine = StartCoroutine(Announce(winner.gameObject.name + " wins the round!"));
         }
-
 
         //Start the upgrade selection screen after the announcement finishes, unless the match has been won
         yield return coroutine;
@@ -171,6 +175,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(ServeBall(countdownSeconds));
 
     }
+
     public IEnumerator ServeBall(float countdownSeconds)
     {
         Ball ball = Instantiate(ballPrefab, Vector3.zero, Quaternion.identity);
