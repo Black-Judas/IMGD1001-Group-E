@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3062069006670144050}
   - component: {fileID: 2627413562416288649}
   - component: {fileID: 4485693895691601948}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Impact Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      minColor: {r: 1, g: 0.2028302, b: 0.2028302, a: 1}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
@@ -611,7 +611,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.3
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -4873,7 +4873,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
