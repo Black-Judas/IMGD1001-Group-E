@@ -25,6 +25,9 @@ public class ModifierHandler : MonoBehaviour
         modifierList.Add(new FastPitch());
         modifierList.Add(new SmallBall());
         modifierList.Add(new BigBall());
+        modifierList.Add(new Trinity());
+        modifierList.Add(new ballstop());
+        modifierList.Add(new glassCannon());
 
         //Clear the dropdown and add all modifiers from the list to it
         Debug.Log("Adding modifiers to "+modifierDropdown);
@@ -113,7 +116,9 @@ public class ModifierHandler : MonoBehaviour
         if (player.modifiers.Contains(modifier))
         {
             player.modifiers[player.modifiers.IndexOf(modifier)].AddStack(-1);
+      
             player.activeModifiers[player.activeModifiers.IndexOf(player.activeModifiers.Find(x => x.modifier == modifier))].stacks -= 1;
+           // player.modifiers[player.modifiers.IndexOf(modifier)].OnRemoveStack();//trigger on remove stack function
 
             // If the player has no more stacks of the modifier, remove the modifier from the player
             if (player.modifiers[player.modifiers.IndexOf(modifier)].GetStacks() == 0)
