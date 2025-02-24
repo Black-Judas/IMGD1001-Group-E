@@ -540,6 +540,7 @@ public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECT
 
             if (ballpos.x < 0 && isSlowedDown == false)
             {
+                
                 ball.AddForce(new Vector2(force, 0));
                 isSlowedDown = true;
                 
@@ -657,6 +658,71 @@ public class BigBall : Modifier
     {
 
         ball.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
+    }
+
+
+}
+
+public class Accelation : Modifier
+{
+    // Properties
+    public override string Name { get { return "Acceleration"; } }
+    public override string Description { get { return "Each hit speeds up paddle"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Epic; } }
+
+    float speedChange = 0;
+    float hitCount = 0;
+    public override void OnApply()
+    {
+        StatChange();
+    }
+
+
+    public override void OnRemove()
+    {
+        StatChange();
+    }
+
+
+    public override void StatChange()
+    {
+        float currentSpeed = this.player.GetStat("speed");
+        float nostackspeed = currentSpeed - speedChange;
+
+
+        if (this.stacks != 0)
+        {
+            speedChange = (1f + (0.5f * this.stacks)) * hitCount;
+        }
+        else
+        {
+            speedChange = 0;
+        }
+
+        float newSpeed = speedChange + nostackspeed;
+
+
+        this.player.statHandler.SetStat(this.player, "speed", newSpeed);
+    }
+
+
+    public override void OnReset(Ball ball)
+    {
+        hitCount = 0;
+        StatChange();
+
+    }
+
+
+    public override void OnBallHit(Ball ball)
+    {
+        hitCount++;
+        StatChange();
+
+
+
 
     }
 

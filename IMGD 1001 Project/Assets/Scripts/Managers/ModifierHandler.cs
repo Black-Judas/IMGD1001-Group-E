@@ -28,6 +28,7 @@ public class ModifierHandler : MonoBehaviour
         modifierList.Add(new Trinity());
         modifierList.Add(new ballstop());
         modifierList.Add(new glassCannon());
+        modifierList.Add(new Accelation());
 
         //Clear the dropdown and add all modifiers from the list to it
         Debug.Log("Adding modifiers to "+modifierDropdown);
