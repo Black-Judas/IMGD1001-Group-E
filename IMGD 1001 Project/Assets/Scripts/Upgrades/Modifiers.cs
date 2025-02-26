@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -25,10 +22,10 @@ public abstract class Modifier : Upgrade
     public virtual void OnReset(Ball ball) { } // Use if on start of point you want smthn to happen
 
     public virtual void OnUpdate(Ball ball) { } //Use on update
-   //public virtual void OnRemoveStack() { } // runs when a stack is removed
+                                                //public virtual void OnRemoveStack() { } // runs when a stack is removed
 
 
-}   
+}
 
 [System.Serializable]
 public class ModifierPanel
@@ -102,7 +99,7 @@ public class SizeBuff : Modifier
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
 
-        float sizeChange = 1;
+    float sizeChange = 1;
     public override void OnApply()
     {
         StatChange();
@@ -113,24 +110,24 @@ public class SizeBuff : Modifier
     }
     public override void StatChange()
     {
-            float currentSize = this.player.GetStat("size");
-            float nostackSize = currentSize/ sizeChange;
+        float currentSize = this.player.GetStat("size");
+        float nostackSize = currentSize / sizeChange;
 
 
-            if (this.stacks != 0)
-            {
-                sizeChange = 1.2f + (0.1f * this.stacks);
-            }
-            else
-            {
-                sizeChange = 1;
-            }
-
-            float newSize= sizeChange * nostackSize;
-
-
-            this.player.statHandler.SetStat(this.player, "size", newSize);
+        if (this.stacks != 0)
+        {
+            sizeChange = 1.2f + (0.1f * this.stacks);
         }
+        else
+        {
+            sizeChange = 1;
+        }
+
+        float newSize = sizeChange * nostackSize;
+
+
+        this.player.statHandler.SetStat(this.player, "size", newSize);
+    }
 }
 
 public class Trinity : Modifier
@@ -195,64 +192,54 @@ public class Trinity : Modifier
 
         this.player.statHandler.SetStat(this.player, "size", newSize);
 
-
-
-
     }
 }
 
+public class GlassCannon : Modifier
+{
+    // Properties
+    public override string Name { get { return "Glass Cannon"; } }
+    public override string Description { get { return "Decreases your paddles size, but increases its power"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Rare; } }
 
-    public class glassCannon : Modifier
+
+    float sizeChange = 1;
+    public override void OnApply()
     {
-        // Properties
-        public override string Name { get { return "Glass Cannon"; } }
-        public override string Description { get { return "Decreases your paddles size, but increases its power"; } }
-        public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
-        public override upgradeRarities Rarity { get { return upgradeRarities.Rare; } }
+        StatChange();
+    }
 
-      
-        float sizeChange = 1;
-        public override void OnApply()
+
+    public override void OnRemove()
+    {
+        StatChange();
+    }
+
+
+    public override void StatChange()
+    {
+
+        float currentSize = this.player.GetStat("size");
+        float nostackSize = currentSize / sizeChange;
+
+
+        if (this.stacks != 0)
         {
-            StatChange();
+            sizeChange = 0.75f - (0.1f * this.stacks);
+        }
+        else
+        {
+            sizeChange = 1;
         }
 
-
-        public override void OnRemove()
-        {
-            StatChange();
-        }
+        float newSize = sizeChange * nostackSize;
 
 
-        public override void StatChange()
-        {
+        this.player.statHandler.SetStat(this.player, "size", newSize);
 
-
-
-
-            float currentSize = this.player.GetStat("size");
-            float nostackSize = currentSize / sizeChange;
-
-
-            if (this.stacks != 0)
-            {
-                sizeChange = 0.75f - (0.1f * this.stacks);
-            }
-            else
-            {
-                sizeChange = 1;
-            }
-
-            float newSize = sizeChange * nostackSize;
-
-
-            this.player.statHandler.SetStat(this.player, "size", newSize);
-
-
-
-
-        }
-        public override void OnBallHit(Ball ball)
+    }
+    public override void OnBallHit(Ball ball)
     {
 
         Vector2 velo = ball.GetVelocity();
@@ -267,6 +254,7 @@ public class Trinity : Modifier
             ball.AddForce(new Vector2(-force, 0));
 
         }
+
     }
 
     public override void OnOpponentBallHit(Ball ball)
@@ -288,14 +276,10 @@ public class Trinity : Modifier
         }
     }
 
-
-
-
-
 }
-    
 
-public class ballstop : Modifier
+
+public class BallStop : Modifier
 {
     // Properties
     public override string Name { get { return "Ballstop"; } }
@@ -307,7 +291,6 @@ public class ballstop : Modifier
     {
         ball.speed = 0;
     }
-   
 
 }
 
@@ -344,7 +327,7 @@ public class SpeedBall : Modifier
 
     public override void OnBallHit(Ball ball)
     {
-        
+
         Vector2 velo = ball.GetVelocity();
         int force = (this.stacks * 4) + 8;
 
@@ -521,7 +504,8 @@ public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECT
             playerNumber = 1;
             ball.AddForce(new Vector2(force, 0));
 
-        } else
+        }
+        else
         {
             playerNumber = 2;
             ball.AddForce(new Vector2(-force, 0));
@@ -533,32 +517,33 @@ public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECT
     {
         int force = (this.stacks * 10) + 50;
         Vector2 ballpos = ball.GetPosition();
-       
+
 
         if (playerNumber == 2)
         {
 
             if (ballpos.x < 0 && isSlowedDown == false)
             {
-                
+
                 ball.AddForce(new Vector2(force, 0));
                 isSlowedDown = true;
-                
+
             }
 
-        } else
+        }
+        else
         {
 
             if (ballpos.x > 0 && isSlowedDown == false)
             {
-                
+
                 ball.AddForce(new Vector2(-force, 0));
                 isSlowedDown = true;
-                
+
             }
 
         }
-     }
+    }
 
 
     public override void OnReset(Ball ball)
@@ -582,7 +567,7 @@ public class SmallBall : Modifier
     {
         Vector3 ballScale = ball.transform.localScale;
 
-        ballScale = ballScale * (0.75f - this.stacks * 0.05f); 
+        ballScale = ballScale * (0.75f - this.stacks * 0.05f);
         ball.transform.localScale = ballScale;
 
         // TODO: FIX BUG WHERE BALL VELOCITY STARTS TO GRADUALLY BECOME VERTICAL - Eric
@@ -614,8 +599,8 @@ public class SmallBall : Modifier
 
     public override void OnReset(Ball ball)
     {
-        
-            ball.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
+        ball.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
     }
 
@@ -648,7 +633,7 @@ public class BigBall : Modifier
     {
 
         Vector3 ballScale = ball.transform.localScale;
-        ballScale = (ballScale * (1.5f+ this.stacks * 0.15f));
+        ballScale = (ballScale * (1.5f + this.stacks * 0.15f));
 
         ball.transform.localScale = ballScale;
 
@@ -664,7 +649,7 @@ public class BigBall : Modifier
 
 }
 
-public class Accelation : Modifier
+public class Acceleration : Modifier
 {
     // Properties
     public override string Name { get { return "Acceleration"; } }
@@ -721,10 +706,6 @@ public class Accelation : Modifier
         hitCount++;
         StatChange();
 
-
-
-
     }
-
 
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +7,7 @@ public class UpgradeButton : MonoBehaviour
     private Upgrade heldUpgrade;
     private TMP_Text nameText;
     private TMP_Text descriptionText;
+    private TMP_Text rarityText;
     private UpgradeSelectionScreen upgradeSelectionScreen;
     public Button button { get; private set; }
 
@@ -16,6 +15,7 @@ public class UpgradeButton : MonoBehaviour
     {
         nameText = transform.Find("Name").GetComponent<TMP_Text>();
         descriptionText = transform.Find("Description").GetComponent<TMP_Text>();
+        rarityText = transform.Find("Rarity").GetComponent<TMP_Text>();
         button = GetComponent<Button>();
         upgradeSelectionScreen = FindObjectOfType<UpgradeSelectionScreen>();
 
@@ -28,6 +28,7 @@ public class UpgradeButton : MonoBehaviour
     {
         nameText.text = heldUpgrade.Name;
         descriptionText.text = heldUpgrade.Description;
+        rarityText.text = heldUpgrade.Rarity.ToString();
     }
 
     public void ChangeUpgrade(Upgrade newUpgrade)

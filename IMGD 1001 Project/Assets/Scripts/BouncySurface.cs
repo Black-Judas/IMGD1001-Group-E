@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BouncySurface : MonoBehaviour
@@ -9,7 +6,7 @@ public class BouncySurface : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+
         Ball ball = collision.gameObject.GetComponent<Ball>();
 
 

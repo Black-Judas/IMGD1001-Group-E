@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static Upgrade;
@@ -63,77 +60,73 @@ public class UpgradeSelectionScreen : MonoBehaviour
     //Generic Methods
     public void RerollUpgrades()
     {
-        
+
         List<Modifier> alreadyShownmodifierList = new List<Modifier>();
 
-       
+        foreach (UpgradeButton button in modifierButtons)
+        {
 
-        
-            
-            foreach (UpgradeButton button in modifierButtons)
+            bool validModifier = false;
+            while (!validModifier)
             {
-                bool validModifier = false; 
-                while (!validModifier)
+
+                upgradeRarities rarity;
+
+                float random = Random.value;
+
+
+                if (random < 0.34)//picls a random rarity
+                {
+                    rarity = upgradeRarities.Common;
+                }
+                else if (random < 0.61)
+                {
+                    rarity = upgradeRarities.Uncommon;
+                }
+                else if (random < 0.81)
+                {
+                    rarity = upgradeRarities.Rare;
+                }
+                else if (random < 0.94)
+                {
+                    rarity = upgradeRarities.Epic;
+                }
+                else
+                {
+                    rarity = upgradeRarities.Legendary;
+                }
+                bool boolvalidRarity = false;
+                Modifier newModifier = modifierHandler.GetRandomModifier();
+
+                while (!boolvalidRarity)//finds a modifer of the random rarity
+                {
+                    newModifier = modifierHandler.GetRandomModifier();
+                    if (newModifier.Rarity == rarity)
+                    {
+                        boolvalidRarity = true;
+                    }
+                }
+
+                validModifier = true;
+
+                foreach (Modifier modifier in alreadyShownmodifierList)//makes sure our modifer is not already chosen
                 {
 
-
-                    upgradeRarities rarity;
-
-                    float random = Random.value;
-
-
-                    if (random < 0.34)//picls a random rarity
+                    if (newModifier == modifier)// makes sure our modifer is not on another button
                     {
-                    rarity = upgradeRarities.Common;
+                        validModifier = false;
                     }
-                    else if (random < 0.61)
+                    if (newModifier.Rarity != rarity)//makes sure the modifer is of the right rarity
                     {
-                    rarity = upgradeRarities.Uncommon;
-                    }
-                    else if (random < 0.81)
-                    {
-                    rarity = upgradeRarities.Rare;
-                    }
-                    else if (random < 0.94)
-                    {
-                        rarity = upgradeRarities.Epic;
-                    }
-                    else 
-                    {
-                        rarity = upgradeRarities.Legendary;
-                    }
-                    bool boolvalidRarity = false;
-                    Modifier newModifier = modifierHandler.GetRandomModifier();
-
-                    while (!boolvalidRarity)//finds a modifer of the random rarity
-                    {
-                        newModifier = modifierHandler.GetRandomModifier();
-                        if (newModifier.Rarity == rarity)
-                        {
-                             boolvalidRarity = true;
-                        }
+                        validModifier = false;
                     }
 
-                    validModifier = true;
-                    
-                    foreach (Modifier modifier in alreadyShownmodifierList)//makes sure our modifer is not already chosen
-                    {
-                   
-                        if (newModifier == modifier)// makes sure our modifer is not on another button
-                    {
-                            validModifier = false;
-                        }
-                        if(newModifier.Rarity != rarity)//makes sure the modifer is of the right rarity
-                        {
-                            validModifier = false;
-                        }
 
-
-                    }
-
-                    button.ChangeUpgrade(newModifier);
-                 alreadyShownmodifierList.Add(newModifier);
                 }
+
+                button.ChangeUpgrade(newModifier);
+                alreadyShownmodifierList.Add(newModifier);
+            }
         }
 
         SelectedUpgrade = null;

@@ -1,11 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class ModifierHandler : MonoBehaviour
 {
@@ -26,12 +21,12 @@ public class ModifierHandler : MonoBehaviour
         modifierList.Add(new SmallBall());
         modifierList.Add(new BigBall());
         modifierList.Add(new Trinity());
-        modifierList.Add(new ballstop());
-        modifierList.Add(new glassCannon());
-        modifierList.Add(new Accelation());
+        modifierList.Add(new BallStop());
+        modifierList.Add(new GlassCannon());
+        modifierList.Add(new Acceleration());
 
         //Clear the dropdown and add all modifiers from the list to it
-        Debug.Log("Adding modifiers to "+modifierDropdown);
+        Debug.Log("Adding modifiers to " + modifierDropdown);
         modifierDropdown.ClearOptions();
         foreach (Modifier modifier in modifierList)
         {
@@ -48,7 +43,7 @@ public class ModifierHandler : MonoBehaviour
         // foreach (Paddle player in FindObjectsOfType<Paddle>())
         // {
         AddModifier(player[0], FindModifierByName(modifierDropdown.GetSelectedOption()));
-       // }
+        // }
         //Send an error message if the modifier doesn't exist
         if (FindModifierByName(modifierDropdown.GetSelectedOption()) == null)
         {
@@ -92,7 +87,7 @@ public class ModifierHandler : MonoBehaviour
     public void AddModifier(Paddle player, Modifier newModifier)
     {
 
-        Debug.Log("Adding modifier \""  + newModifier.Name + "\" to "+player.gameObject.name);
+        Debug.Log("Adding modifier \"" + newModifier.Name + "\" to " + player.gameObject.name);
         //If the player's modifier list contains a modifier of the same type as the new modifier, add a stack to the existing modifier
         if (player.modifiers.Any(x => x.GetType() == newModifier.GetType()))
         {
@@ -117,9 +112,9 @@ public class ModifierHandler : MonoBehaviour
         if (player.modifiers.Contains(modifier))
         {
             player.modifiers[player.modifiers.IndexOf(modifier)].AddStack(-1);
-      
+
             player.activeModifiers[player.activeModifiers.IndexOf(player.activeModifiers.Find(x => x.modifier == modifier))].stacks -= 1;
-           // player.modifiers[player.modifiers.IndexOf(modifier)].OnRemoveStack();//trigger on remove stack function
+            // player.modifiers[player.modifiers.IndexOf(modifier)].OnRemoveStack();//trigger on remove stack function
 
             // If the player has no more stacks of the modifier, remove the modifier from the player
             if (player.modifiers[player.modifiers.IndexOf(modifier)].GetStacks() == 0)
@@ -133,7 +128,7 @@ public class ModifierHandler : MonoBehaviour
     public void ClearModifiers(Paddle player)
     {
         foreach (Modifier modifier in player.modifiers)
-        {            
+        {
             player.modifiers[player.modifiers.IndexOf(modifier)].ClearStacks(); //Clear the stacks of the modifier
             player.modifiers[player.modifiers.IndexOf(modifier)].OnRemove(); //Trigger the OnRemove method of the modifier
         }

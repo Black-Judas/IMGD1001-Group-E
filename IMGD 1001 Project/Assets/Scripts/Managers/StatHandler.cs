@@ -21,7 +21,7 @@ public class StatHandler : MonoBehaviour
 
     private void AddPlayer(Paddle player) //Add a new player to the dictionary with base stats
     {
-        playerStats.Add(player, new StatsList()); 
+        playerStats.Add(player, new StatsList());
 
         //Add the base stats to the player
         playerStats[player].AddStat("speed", baseSpeed);

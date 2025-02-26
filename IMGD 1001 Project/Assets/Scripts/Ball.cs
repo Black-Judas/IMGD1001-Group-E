@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -7,7 +5,8 @@ public class Ball : MonoBehaviour
     public float speed = 200f;
     public bool hasBeenHit = false; // sees if the ball has been hit this point
 
-    public enum speedTier {
+    public enum speedTier
+    {
         Slow,
         Medium,
         Fast,
@@ -34,7 +33,7 @@ public class Ball : MonoBehaviour
         if (GetVelocity().magnitude > 17)
         {
             currentSpeedTier = speedTier.Lightning;
-        } 
+        }
         else if (GetVelocity().magnitude > 13)
         {
             currentSpeedTier = speedTier.Fast;
