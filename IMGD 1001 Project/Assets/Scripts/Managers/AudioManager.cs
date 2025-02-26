@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -36,7 +34,7 @@ public class AudioManager : MonoBehaviour
         {
             musicSource.clip = sound.clip;
             musicSource.Play();
-        }   
+        }
     }
 
     public void PlaySFX(string name, float volume = 1)
@@ -45,7 +43,7 @@ public class AudioManager : MonoBehaviour
 
         if (sound == null)
         {
-            Debug.LogError(name+" Not Found");
+            Debug.LogError(name + " Not Found");
         }
         else
         {

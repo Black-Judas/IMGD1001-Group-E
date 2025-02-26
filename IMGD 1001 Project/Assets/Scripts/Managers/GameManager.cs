@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -17,7 +16,7 @@ public class GameManager : MonoBehaviour
     public Text player1MatchScoreText, player2MatchScoreText; //UI text for the player's match score
     private int _player1MatchScore, _player2MatchScore; //The player's match score
     public RoundScoreCounter player1RoundScoreCounter, player2RoundScoreCounter; //The players' round score counters
-    
+
 
     //General UI references
     public TMP_Text countdownText;
@@ -114,7 +113,7 @@ public class GameManager : MonoBehaviour
         this.player2Paddle.ResetPosition();
 
     }
-    
+
 
     //Coroutines
     IEnumerator Announce(string message, float duration = 4f)
@@ -203,7 +202,7 @@ public class GameManager : MonoBehaviour
                 AudioManager.instance.PlaySFX("beep1");
                 currentSecond = math.floor(countdownSeconds);
             }
-            countdownText.transform.localScale = new Vector3(countdownSeconds % 1+0.4f, countdownSeconds % 1+0.4f, 1);
+            countdownText.transform.localScale = new Vector3(countdownSeconds % 1 + 0.4f, countdownSeconds % 1 + 0.4f, 1);
             countdownText.text = math.ceil(countdownSeconds).ToString();
             countdownSeconds -= Time.deltaTime;
             yield return null;

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,6 +47,10 @@ public abstract class Paddle : MonoBehaviour
 
     public void UpdateStats()
     {
+
+
+        // this.statHandler.SetStat(this, "size", this.statHandler.baseSize);
+
         stats = statHandler.GetStats(this);
     }
 

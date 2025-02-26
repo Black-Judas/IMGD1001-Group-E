@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SampleBouncySurface : MonoBehaviour
@@ -10,9 +8,9 @@ public class SampleBouncySurface : MonoBehaviour
     {
         SampleBall ball = collision.gameObject.GetComponent<SampleBall>();
 
-        if (ball != null )
+        if (ball != null)
         {
-            
+
             Vector2 normal = collision.GetContact(0).normal;
 
             ball.AddForce(-normal * bounceStrength);

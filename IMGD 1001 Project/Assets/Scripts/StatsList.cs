@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,7 +18,7 @@ public class Stat
 [System.Serializable]
 public class StatsList
 {
-    [field:SerializeField] public List<Stat> stats { get; private set; } = new List<Stat>();
+    [field: SerializeField] public List<Stat> stats { get; private set; } = new List<Stat>();
     public void AddStat(string name, float value) //Add a stat to the list
     {
         stats.Add(new Stat(name, value));

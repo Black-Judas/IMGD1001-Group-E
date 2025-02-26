@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -25,9 +22,10 @@ public abstract class Modifier : Upgrade
     public virtual void OnReset(Ball ball) { } // Use if on start of point you want smthn to happen
 
     public virtual void OnUpdate(Ball ball) { } //Use on update
+                                                //public virtual void OnRemoveStack() { } // runs when a stack is removed
 
 
-}   
+}
 
 [System.Serializable]
 public class ModifierPanel
@@ -51,30 +49,43 @@ public class ModifierPanel
 public class SpeedBuff : Modifier
 {
     // Properties
-    public override string Name{get{return "Speed Up!";}}
+    public override string Name { get { return "Speed Up!"; } }
     public override string Description { get { return "Increase your paddle's move speed"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
 
-
+    float speedChange = 0;
     public override void OnApply()
     {
         StatChange();
     }
+
+
     public override void OnRemove()
     {
         StatChange();
     }
+
+
     public override void StatChange()
     {
+        float currentSpeed = this.player.GetStat("speed");
+        float nostackspeed = currentSpeed - speedChange;
+
+
         if (this.stacks != 0)
         {
-            this.player.statHandler.SetStat(this.player, "speed", this.player.statHandler.baseSpeed + 3 + (2 * this.stacks)); // Set the player's speed to 3 + 2 * stacks
+            speedChange = 3 + (2 * this.stacks);
         }
         else
         {
-            this.player.statHandler.SetStat(this.player, "speed", this.player.statHandler.baseSpeed); // Set the player's speed to the base speed
+            speedChange = 0;
         }
+
+        float newSpeed = speedChange + nostackspeed;
+
+
+        this.player.statHandler.SetStat(this.player, "speed", newSpeed);
     }
 }
 
@@ -88,7 +99,7 @@ public class SizeBuff : Modifier
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
 
-
+    float sizeChange = 1;
     public override void OnApply()
     {
         StatChange();
@@ -99,17 +110,189 @@ public class SizeBuff : Modifier
     }
     public override void StatChange()
     {
+        float currentSize = this.player.GetStat("size");
+        float nostackSize = currentSize / sizeChange;
+
+
         if (this.stacks != 0)
         {
-            this.player.statHandler.SetStat(this.player, "size", this.player.statHandler.baseSize * 1.2f + (0.1f * this.stacks)); // Set the player's speed to 3 + 2 * stacks
+            sizeChange = 1.2f + (0.1f * this.stacks);
         }
         else
         {
-            this.player.statHandler.SetStat(this.player, "size", this.player.statHandler.baseSize); // Set the player's speed to the base speed
+            sizeChange = 1;
         }
+
+        float newSize = sizeChange * nostackSize;
+
+
+        this.player.statHandler.SetStat(this.player, "size", newSize);
     }
 }
 
+public class Trinity : Modifier
+{
+    // Properties
+    public override string Name { get { return "Trinity"; } }
+    public override string Description { get { return "Increase your paddle's move speed, hit power, and size slightly"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Uncommon; } }
+
+    float speedChange = 0;
+    float sizeChange = 1;
+    public override void OnApply()
+    {
+        StatChange();
+    }
+
+
+    public override void OnRemove()
+    {
+        StatChange();
+    }
+
+
+    public override void StatChange()
+    {
+        float currentSpeed = this.player.GetStat("speed");
+        float nostackspeed = currentSpeed - speedChange;
+
+
+        if (this.stacks != 0)
+        {
+            speedChange = 1.5f + (1 * this.stacks);
+        }
+        else
+        {
+            speedChange = 0;
+        }
+
+        float newSpeed = speedChange + nostackspeed;
+
+
+        this.player.statHandler.SetStat(this.player, "speed", newSpeed);
+
+
+
+        float currentSize = this.player.GetStat("size");
+        float nostackSize = currentSize / sizeChange;
+
+
+        if (this.stacks != 0)
+        {
+            sizeChange = 1.1f + (0.05f * this.stacks);
+        }
+        else
+        {
+            sizeChange = 1;
+        }
+
+        float newSize = sizeChange * nostackSize;
+
+
+        this.player.statHandler.SetStat(this.player, "size", newSize);
+
+    }
+}
+
+public class GlassCannon : Modifier
+{
+    // Properties
+    public override string Name { get { return "Glass Cannon"; } }
+    public override string Description { get { return "Decreases your paddles size, but increases its power"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Rare; } }
+
+
+    float sizeChange = 1;
+    public override void OnApply()
+    {
+        StatChange();
+    }
+
+
+    public override void OnRemove()
+    {
+        StatChange();
+    }
+
+
+    public override void StatChange()
+    {
+
+        float currentSize = this.player.GetStat("size");
+        float nostackSize = currentSize / sizeChange;
+
+
+        if (this.stacks != 0)
+        {
+            sizeChange = 0.75f - (0.1f * this.stacks);
+        }
+        else
+        {
+            sizeChange = 1;
+        }
+
+        float newSize = sizeChange * nostackSize;
+
+
+        this.player.statHandler.SetStat(this.player, "size", newSize);
+
+    }
+    public override void OnBallHit(Ball ball)
+    {
+
+        Vector2 velo = ball.GetVelocity();
+        int force = (this.stacks * 8) + 13;
+
+        if (velo[0] > 0)
+        {
+            ball.AddForce(new Vector2(force, 0));
+        }
+        else
+        {
+            ball.AddForce(new Vector2(-force, 0));
+
+        }
+
+    }
+
+    public override void OnOpponentBallHit(Ball ball)
+    {
+        if (ball.hasBeenHit)
+        {
+            Vector2 velo = ball.GetVelocity();
+            int force = -((this.stacks * 8) + 13);
+
+            if (velo[0] > 0)
+            {
+                ball.AddForce(new Vector2(force, 0));
+            }
+            else
+            {
+                ball.AddForce(new Vector2(-force, 0));
+
+            }
+        }
+    }
+
+}
+
+
+public class BallStop : Modifier
+{
+    // Properties
+    public override string Name { get { return "Ballstop"; } }
+    public override string Description { get { return "Freezes the ball, for testing"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Developer; } }
+
+    public override void OnReset(Ball ball)
+    {
+        ball.speed = 0;
+    }
+
+}
 
 [System.Serializable]
 public class RedBallBlueBall : Modifier
@@ -144,7 +327,7 @@ public class SpeedBall : Modifier
 
     public override void OnBallHit(Ball ball)
     {
-        
+
         Vector2 velo = ball.GetVelocity();
         int force = (this.stacks * 4) + 8;
 
@@ -188,7 +371,7 @@ public class Gamble : Modifier
     public override string Name { get { return "Let's Go Gambling!!"; } }
     public override string Description { get { return "Small chance for ball to get a crazy boost on hit"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
-    public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
+    public override upgradeRarities Rarity { get { return upgradeRarities.Epic; } }
 
 
     bool gamble = false;
@@ -252,7 +435,7 @@ public class Invisiball : Modifier
     public override string Name { get { return "Invisiball"; } }
     public override string Description { get { return "Turn the ball translucent on hit"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
-    public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
+    public override upgradeRarities Rarity { get { return upgradeRarities.Legendary; } }
 
 
     public override void OnBallHit(Ball ball)
@@ -303,7 +486,7 @@ public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECT
     public override string Name { get { return "Fast Pitch"; } }
     public override string Description { get { return "The ball moves Lickity Split until it reaches the middle"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
-    public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
+    public override upgradeRarities Rarity { get { return upgradeRarities.Rare; } }
 
     bool isSlowedDown = true;
 
@@ -321,7 +504,8 @@ public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECT
             playerNumber = 1;
             ball.AddForce(new Vector2(force, 0));
 
-        } else
+        }
+        else
         {
             playerNumber = 2;
             ball.AddForce(new Vector2(-force, 0));
@@ -333,31 +517,33 @@ public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECT
     {
         int force = (this.stacks * 10) + 50;
         Vector2 ballpos = ball.GetPosition();
-       
+
 
         if (playerNumber == 2)
         {
 
             if (ballpos.x < 0 && isSlowedDown == false)
             {
+
                 ball.AddForce(new Vector2(force, 0));
                 isSlowedDown = true;
-                
+
             }
 
-        } else
+        }
+        else
         {
 
             if (ballpos.x > 0 && isSlowedDown == false)
             {
-                
+
                 ball.AddForce(new Vector2(-force, 0));
                 isSlowedDown = true;
-                
+
             }
 
         }
-     }
+    }
 
 
     public override void OnReset(Ball ball)
@@ -374,14 +560,14 @@ public class SmallBall : Modifier
     public override string Name { get { return "Small Ball"; } }
     public override string Description { get { return "Shrinks the ball's size until your opponent hits it"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
-    public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
+    public override upgradeRarities Rarity { get { return upgradeRarities.Uncommon; } }
 
 
     public override void OnBallHit(Ball ball)
     {
         Vector3 ballScale = ball.transform.localScale;
 
-        ballScale = ballScale * (0.75f - this.stacks * 0.05f); 
+        ballScale = ballScale * (0.75f - this.stacks * 0.05f);
         ball.transform.localScale = ballScale;
 
         // TODO: FIX BUG WHERE BALL VELOCITY STARTS TO GRADUALLY BECOME VERTICAL - Eric
@@ -413,8 +599,8 @@ public class SmallBall : Modifier
 
     public override void OnReset(Ball ball)
     {
-        
-            ball.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+
+        ball.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
     }
 
@@ -429,7 +615,7 @@ public class BigBall : Modifier
     public override string Name { get { return "Big Ball"; } }
     public override string Description { get { return "Makes the ball larger when your opponent hits it"; } }
     public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
-    public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
+    public override upgradeRarities Rarity { get { return upgradeRarities.Uncommon; } }
 
 
     public override void OnBallHit(Ball ball)
@@ -447,7 +633,7 @@ public class BigBall : Modifier
     {
 
         Vector3 ballScale = ball.transform.localScale;
-        ballScale = (ballScale * (1.5f+ this.stacks * 0.15f));
+        ballScale = (ballScale * (1.5f + this.stacks * 0.15f));
 
         ball.transform.localScale = ballScale;
 
@@ -460,5 +646,66 @@ public class BigBall : Modifier
 
     }
 
+
+}
+
+public class Acceleration : Modifier
+{
+    // Properties
+    public override string Name { get { return "Acceleration"; } }
+    public override string Description { get { return "Each hit speeds up paddle"; } }
+    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override upgradeRarities Rarity { get { return upgradeRarities.Epic; } }
+
+    float speedChange = 0;
+    float hitCount = 0;
+    public override void OnApply()
+    {
+        StatChange();
+    }
+
+
+    public override void OnRemove()
+    {
+        StatChange();
+    }
+
+
+    public override void StatChange()
+    {
+        float currentSpeed = this.player.GetStat("speed");
+        float nostackspeed = currentSpeed - speedChange;
+
+
+        if (this.stacks != 0)
+        {
+            speedChange = (1f + (0.5f * this.stacks)) * hitCount;
+        }
+        else
+        {
+            speedChange = 0;
+        }
+
+        float newSpeed = speedChange + nostackspeed;
+
+
+        this.player.statHandler.SetStat(this.player, "speed", newSpeed);
+    }
+
+
+    public override void OnReset(Ball ball)
+    {
+        hitCount = 0;
+        StatChange();
+
+    }
+
+
+    public override void OnBallHit(Ball ball)
+    {
+        hitCount++;
+        StatChange();
+
+    }
 
 }

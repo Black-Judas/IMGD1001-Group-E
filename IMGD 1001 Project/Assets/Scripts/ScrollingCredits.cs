@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScrollingCredits : MonoBehaviour
@@ -31,11 +28,13 @@ public class ScrollingCredits : MonoBehaviour
         {
 
             RectTransform.anchoredPosition += new Vector2(0, scrollSpeed * Time.deltaTime);
-        
-        } else {
+
+        }
+        else
+        {
 
             RectTransform.anchoredPosition += new Vector2(0, -Input.mouseScrollDelta.y * scrollSpeed);
-        
+
         }
     }
 }
