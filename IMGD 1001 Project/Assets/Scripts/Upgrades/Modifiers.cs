@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 
 // Modifiers are upgrades that have passive effects and can be stacked
@@ -22,7 +23,7 @@ public abstract class Modifier : Upgrade
     public virtual void OnReset(Ball ball) { } // Use if on start of point you want smthn to happen
 
     public virtual void OnUpdate(Ball ball) { } //Use on update
-                                                //public virtual void OnRemoveStack() { } // runs when a stack is removed
+    //public virtual void OnRemoveStack() { } // runs when a stack is removed
 
 
 }
@@ -51,7 +52,7 @@ public class SpeedBuff : Modifier
     // Properties
     public override string Name { get { return "Speed Up!"; } }
     public override string Description { get { return "Increase your paddle's move speed"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Speed Buff"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
 
     float speedChange = 0;
@@ -96,7 +97,7 @@ public class SizeBuff : Modifier
     // Properties
     public override string Name { get { return "Grow"; } }
     public override string Description { get { return "Increase the length of your paddle to cover more ground"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Size Buff"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
 
     float sizeChange = 1;
@@ -135,7 +136,7 @@ public class Trinity : Modifier
     // Properties
     public override string Name { get { return "Trinity"; } }
     public override string Description { get { return "Increase your paddle's move speed, hit power, and size slightly"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Trinity"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Uncommon; } }
 
     float speedChange = 0;
@@ -200,7 +201,7 @@ public class GlassCannon : Modifier
     // Properties
     public override string Name { get { return "Glass Cannon"; } }
     public override string Description { get { return "Decreases your paddles size, but increases its power"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Glass Cannon"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Rare; } }
 
 
@@ -284,7 +285,7 @@ public class BallStop : Modifier
     // Properties
     public override string Name { get { return "Ballstop"; } }
     public override string Description { get { return "Freezes the ball, for testing"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return null; } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Developer; } }
 
     public override void OnReset(Ball ball)
@@ -300,7 +301,7 @@ public class RedBallBlueBall : Modifier
     // Properties
     public override string Name { get { return "Red Ball, Blue Ball"; } }
     public override string Description { get { return "Turns the ball red when you hit it and blue when your opponent hits it"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return null; } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Developer; } }
 
     public override void OnBallHit(Ball ball)
@@ -321,7 +322,7 @@ public class SpeedBall : Modifier
     // Properties
     public override string Name { get { return "Speed Ball"; } }
     public override string Description { get { return "Speeds ball up until your oppent hits it"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Speed Ball"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Common; } }
 
 
@@ -370,7 +371,7 @@ public class Gamble : Modifier
     // Properties
     public override string Name { get { return "Let's Go Gambling!!"; } }
     public override string Description { get { return "Small chance for ball to get a crazy boost on hit"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Gambling"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Epic; } }
 
 
@@ -434,7 +435,7 @@ public class Invisiball : Modifier
     // Properties
     public override string Name { get { return "Invisiball"; } }
     public override string Description { get { return "Turn the ball translucent on hit"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Invisible"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Legendary; } }
 
 
@@ -485,7 +486,7 @@ public class FastPitch : Modifier // TODO: FIX BUG WHERE BALL CHANGES ITS DIRECT
     // Properties
     public override string Name { get { return "Fast Pitch"; } }
     public override string Description { get { return "The ball moves Lickity Split until it reaches the middle"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Fast Pitch"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Rare; } }
 
     bool isSlowedDown = true;
@@ -559,7 +560,7 @@ public class SmallBall : Modifier
     // Properties
     public override string Name { get { return "Small Ball"; } }
     public override string Description { get { return "Shrinks the ball's size until your opponent hits it"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Small Ball"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Uncommon; } }
 
 
@@ -614,7 +615,7 @@ public class BigBall : Modifier
     // Properties
     public override string Name { get { return "Big Ball"; } }
     public override string Description { get { return "Makes the ball larger when your opponent hits it"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Big Ball"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Uncommon; } }
 
 
@@ -654,7 +655,7 @@ public class Acceleration : Modifier
     // Properties
     public override string Name { get { return "Acceleration"; } }
     public override string Description { get { return "Each hit speeds up paddle"; } }
-    public override UnityEngine.UI.Image Image { get { return null; } } // TODO: ADD IMAGE
+    public override Sprite Icon { get { return Resources.Load<Sprite>("Accelerate"); } }
     public override upgradeRarities Rarity { get { return upgradeRarities.Epic; } }
 
     float speedChange = 0;

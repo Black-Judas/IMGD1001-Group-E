@@ -10,6 +10,7 @@ public class UpgradeSelectionScreen : MonoBehaviour
     [SerializeField] private Button rerollButton;
     [SerializeField] private Button confirmButton;
     [SerializeField] private TMP_Text playerText;
+    [SerializeField] private TMP_Text text;
 
     private GameManager gameManager;
     private ModifierHandler modifierHandler;
@@ -17,6 +18,7 @@ public class UpgradeSelectionScreen : MonoBehaviour
     public Upgrade SelectedUpgrade { get; private set; }
 
     public Paddle targetedPlayer;
+
 
     //Unity Methods
     private void Awake()
@@ -75,7 +77,7 @@ public class UpgradeSelectionScreen : MonoBehaviour
                 float random = Random.value;
 
 
-                if (random < 0.34)//picls a random rarity
+                if (random < 0.34)//Picks a random rarity
                 {
                     rarity = upgradeRarities.Common;
                 }
@@ -98,7 +100,7 @@ public class UpgradeSelectionScreen : MonoBehaviour
                 bool boolvalidRarity = false;
                 Modifier newModifier = modifierHandler.GetRandomModifier();
 
-                while (!boolvalidRarity)//finds a modifer of the random rarity
+                while (!boolvalidRarity)//Finds a modifer of the random rarity
                 {
                     newModifier = modifierHandler.GetRandomModifier();
                     if (newModifier.Rarity == rarity)
@@ -109,14 +111,14 @@ public class UpgradeSelectionScreen : MonoBehaviour
 
                 validModifier = true;
 
-                foreach (Modifier modifier in alreadyShownmodifierList)//makes sure our modifer is not already chosen
+                foreach (Modifier modifier in alreadyShownmodifierList)//Makes sure our modifer is not already chosen
                 {
 
-                    if (newModifier == modifier)// makes sure our modifer is not on another button
+                    if (newModifier == modifier) // Makes sure our modifer is not on another button
                     {
                         validModifier = false;
                     }
-                    if (newModifier.Rarity != rarity)//makes sure the modifer is of the right rarity
+                    if (newModifier.Rarity != rarity) //Makes sure the modifer is of the right rarity
                     {
                         validModifier = false;
                     }
