@@ -7,4 +7,10 @@ public class MenuManager : MonoBehaviour
         AudioManager.instance.PlayMusic("menuTheme");
     }
 
+    public void CloseGame()
+    {
+        Debug.Log("Game closed");
+        Application.Quit();
+    }
+
 }

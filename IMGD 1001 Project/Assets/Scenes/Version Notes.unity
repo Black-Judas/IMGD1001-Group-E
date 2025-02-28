@@ -1441,12 +1441,13 @@ MonoBehaviour:
     until it passes the middle line\r\n- Added smallball Modifier, which decreases
     ball size on hit until your opponent hits it\r\n- Added bigball Modifier, which
     makes the ball increase in size when your oppenet hits it until you hit it\r\n-
-    Added crowd cheer effect when a player scores\n\n<u><b>v0.2.0.0s5: Art Update</b></u>\n-
-    Game now takes place in a neon arena\n- Paddle shape updated to allow for more
-    consistent aiming\n- Completely renovated upgrade selection screen UI\n- Added
-    several new modifiers\n- Modifiers now have an associated rarity that determines
-    how often they appear\n- Added new sound effects for the ball hitting a wall\n-
-    Named the game and updated splash screen to match"
+    Added crowd cheer effect when a player scores\n\n<u><b>v0.2.0.0s5: Visuals Update</b></u>\n-
+    Game now takes place in a neon arena\n- Added a trail to the ball to help track
+    its motion and speed\n- Paddle shape updated to allow for more consistent aiming\n-
+    Completely renovated upgrade selection screen UI\n- Added several new modifiers\n-
+    Modifiers now have an associated rarity that determines how often they appear\n-
+    Added new sound effects for the ball hitting a wall\n- Named the game and updated
+    splash screen to match\n- Added quit button to main menu"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

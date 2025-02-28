@@ -446,6 +446,7 @@ public class Invisiball : Modifier
         //newBallColor.a = Random.value - ((0.2f * this.stacks));
         newBallColor.a = 0;
         ball.GetComponent<SpriteRenderer>().color = newBallColor;
+        ball._trailRenderer.forceRenderingOff = true;
 
     }
 
@@ -474,6 +475,7 @@ public class Invisiball : Modifier
         Color ballColor = ball.GetComponent<SpriteRenderer>().color;
         ballColor.a = 1;
         ball.GetComponent<SpriteRenderer>().color = ballColor;
+        ball._trailRenderer.forceRenderingOff = false;
 
     }
 

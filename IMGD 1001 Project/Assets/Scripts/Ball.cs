@@ -19,6 +19,7 @@ public class Ball : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
+    public TrailRenderer _trailRenderer { get; private set; }
 
     private ParticleSystem impactParticlesInstance;
 
@@ -26,6 +27,7 @@ public class Ball : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _trailRenderer = GetComponent<TrailRenderer>();
     }
 
     private void Update()
@@ -95,8 +97,36 @@ public class Ball : MonoBehaviour
         //Spawn in particles
         SpawnImpactParticles(collision);
 
-    }
+        Paddle paddle = collision.gameObject.GetComponent<Paddle>();
 
+        if (paddle == null)
+        {
+            WallImpactSound();
+        }
+
+    }
+    private void WallImpactSound()
+    {
+        string soundToPlay;
+
+        switch (GetSpeedTier())
+        {
+            case speedTier.Slow:
+                soundToPlay = "wallLight";
+                break;
+            case speedTier.Medium:
+                soundToPlay = "wallMedium";
+                break;
+            case speedTier.Fast:
+                soundToPlay = "wallHeavy";
+                break;
+            default:
+                soundToPlay = "wallHeavy";
+                break;
+        }
+
+        AudioManager.instance.PlaySFX(soundToPlay);
+    }
     private void SpawnImpactParticles(Collision2D collision)
     {
         Vector2 contactPoint = collision.GetContact(0).point;   //Determine contact point
