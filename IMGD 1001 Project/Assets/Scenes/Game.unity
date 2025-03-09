@@ -512,7 +512,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -145.5, y: 2.2}
+  m_AnchoredPosition: {x: -687.1, y: 2.2}
   m_SizeDelta: {x: 512, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133562672
@@ -1393,6 +1393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 410218697}
   - component: {fileID: 410218698}
+  - component: {fileID: 410218699}
   m_Layer: 5
   m_Name: Upgrade Selection Screen
   m_TagString: Untagged
@@ -1443,6 +1444,18 @@ MonoBehaviour:
   playerText: {fileID: 1449731423}
   text: {fileID: 0}
   targetedPlayer: {fileID: 0}
+--- !u!225 &410218699
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410218696}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &444831768
 GameObject:
   m_ObjectHideFlags: 0
@@ -2187,7 +2200,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 233.56, y: -30.88}
+  m_AnchoredPosition: {x: 233.56, y: -400.9}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &527014239
@@ -5948,6 +5961,7 @@ GameObject:
   - component: {fileID: 1656086399}
   - component: {fileID: 1656086398}
   - component: {fileID: 1656086400}
+  - component: {fileID: 1656086401}
   m_Layer: 5
   m_Name: Debug Menu
   m_TagString: Untagged
@@ -6040,6 +6054,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!225 &1656086401
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656086396}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1672093666
 GameObject:
   m_ObjectHideFlags: 0
