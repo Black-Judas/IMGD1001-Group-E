@@ -14,10 +14,13 @@ public class UpgradeSelectionScreen : MonoBehaviour
 
     private GameManager gameManager;
     private ModifierHandler modifierHandler;
+    private UIManager uiManager;
 
     public Upgrade SelectedUpgrade { get; private set; }
 
     public Paddle targetedPlayer;
+
+    public bool selectionPhase = false;
 
 
     //Unity Methods
@@ -25,6 +28,8 @@ public class UpgradeSelectionScreen : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         modifierHandler = FindObjectOfType<ModifierHandler>();
+        uiManager = FindObjectOfType<UIManager>();
+
         confirmButton.onClick.AddListener(ConfirmSelection);
         rerollButton.onClick.AddListener(RerollUpgrades);
 
@@ -33,7 +38,9 @@ public class UpgradeSelectionScreen : MonoBehaviour
 
     private void Start()
     {
-        this.gameObject.SetActive(false);
+        uiManager.upgradesCanvasGroup.interactable = false;
+        uiManager.upgradesCanvasGroup.alpha = 0f;
+        uiManager.upgradesCanvasGroup.blocksRaycasts = false;
     }
 
 
@@ -42,6 +49,7 @@ public class UpgradeSelectionScreen : MonoBehaviour
     {
         SelectedUpgrade = upgrade;
         Debug.Log("Selected upgrade: " + SelectedUpgrade.Name);
+        //uiManager.DetailCardAppear();
     }
 
     public void ConfirmSelection()
@@ -55,13 +63,21 @@ public class UpgradeSelectionScreen : MonoBehaviour
             } //TODO: ADD ACTIVE ABILITY LOGIC HERE
         }
 
-        this.gameObject.SetActive(false);
+        uiManager.upgradeSelectionScreenOut();
+
+        selectionPhase = false;
+        
+        gameManager.StartRound();
     }
 
 
     //Generic Methods
     public void RerollUpgrades()
     {
+        if (selectionPhase)
+        {
+            uiManager.ButtonsSlideIn(.2f);
+        }
 
         List<Modifier> alreadyShownmodifierList = new List<Modifier>();
 
@@ -137,9 +153,12 @@ public class UpgradeSelectionScreen : MonoBehaviour
     public void StartPicking(Paddle player)
     {
         Debug.Log("Starting upgrade selection for " + player.gameObject.name);
-        this.gameObject.SetActive(true);
+
+        uiManager.upgradeSelectionScreenIn();
+
         playerText.text = player.gameObject.name;
         targetedPlayer = player;
         RerollUpgrades();
+        selectionPhase = true;
     }
 }

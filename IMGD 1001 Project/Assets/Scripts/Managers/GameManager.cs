@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
 
     //General UI references
+    private UIManager uiManager;
     public TMP_Text countdownText;
     public GameObject debugMenu;
     public TMP_Text announcementText;
@@ -29,7 +30,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ToggleDebugMenu();
-        upgradeSelectionScreen.gameObject.SetActive(false);
         StartCoroutine(ServeBall(countdownSeconds));
     }
     private void Update()
@@ -43,6 +43,10 @@ public class GameManager : MonoBehaviour
         {
             ToggleDebugMenu();
         }
+    }
+    private void Awake()
+    {
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     //Debug methods
@@ -60,6 +64,12 @@ public class GameManager : MonoBehaviour
 
 
     //Game methods
+    public void StartRound()
+    {
+        player1RoundScoreCounter.ResetScore();
+        player2RoundScoreCounter.ResetScore();
+        StartCoroutine(ServeBall(countdownSeconds));
+    }
     public void Player1Scores()
     {
 
@@ -164,14 +174,6 @@ public class GameManager : MonoBehaviour
         }
         ResetPlayArea();
         upgradeSelectionScreen.StartPicking(loser);
-
-        //Wait until the player has selected their upgrade before continuing
-        yield return new WaitUntil(() => upgradeSelectionScreen.gameObject.activeSelf == false);
-
-        //Start the next round
-        player1RoundScoreCounter.ResetScore();
-        player2RoundScoreCounter.ResetScore();
-        StartCoroutine(ServeBall(countdownSeconds));
 
     }
 
