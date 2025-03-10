@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     //General UI references
     private UIManager uiManager;
     public TMP_Text countdownText;
-    public GameObject debugMenu;
     public TMP_Text announcementText;
     public UpgradeSelectionScreen upgradeSelectionScreen;
 
@@ -29,7 +28,7 @@ public class GameManager : MonoBehaviour
     //Unity methods
     private void Start()
     {
-        ToggleDebugMenu();
+        uiManager.DebugMenuOff();
         StartCoroutine(ServeBall(countdownSeconds));
     }
     private void Update()
@@ -41,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            ToggleDebugMenu();
+            uiManager.ToggleDebugMenu();
         }
     }
     private void Awake()
@@ -49,12 +48,6 @@ public class GameManager : MonoBehaviour
         uiManager = FindObjectOfType<UIManager>();
     }
 
-    //Debug methods
-    public void ToggleDebugMenu() //Toggle the debug menu
-    {
-        //Debug.Log("Debug toggled");
-        debugMenu.SetActive(!debugMenu.activeSelf);
-    }
 
     //Go to the main menu
     public void GoToMainMenu()

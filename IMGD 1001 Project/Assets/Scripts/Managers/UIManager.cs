@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    //Upgrade Selection Screen
+    [Header("Upgrade Selection Screen")]
     public CanvasGroup upgradesCanvasGroup;
 
     public RectTransform upgradeButtonsRectTransform;
@@ -94,4 +94,34 @@ public class UIManager : MonoBehaviour
         upgradesCanvasGroup.alpha = 1f;
         upgradesCanvasGroup.DOFade(0, fadeDuration);
     }
+
+
+
+    [Header("Debug Menu")]
+    public CanvasGroup debugMenuGroup;
+
+    public void DebugMenuOn()
+    {
+        debugMenuGroup.alpha = 1f;
+        debugMenuGroup.interactable = true;
+        debugMenuGroup.blocksRaycasts = true;
+    }
+    public void DebugMenuOff()
+    {
+        debugMenuGroup.alpha = 0f;
+        debugMenuGroup.interactable = false;
+        debugMenuGroup.blocksRaycasts = false;
+    }
+    public void ToggleDebugMenu()
+    {
+        if (debugMenuGroup.interactable)
+        {
+            DebugMenuOff();
+        }
+        else
+        {
+            DebugMenuOn();
+        }
+    }
+
 }
