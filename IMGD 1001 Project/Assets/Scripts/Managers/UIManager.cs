@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public CanvasGroup upgradesCanvasGroup;
 
     public RectTransform upgradeButtonsRectTransform;
-    public Vector2 upgradeButtonsLocation = new Vector2(-145f,0f);
+    public Vector2 upgradeButtonsLocation = new Vector2(-145f, 0f);
 
     public CanvasGroup detailCardGroup;
     public RectTransform detailCardRectTransform;
@@ -20,7 +20,6 @@ public class UIManager : MonoBehaviour
     public Vector2 topTextPosition;
 
     public Image backgroundOverlay;
-
 
     public void upgradeSelectionScreenIn()
     {
@@ -124,4 +123,21 @@ public class UIManager : MonoBehaviour
         }
     }
 
+
+
+    [Header("Match UI")]
+    public CanvasGroup scoresGroup;
+    public RectTransform scoresRectTransform;
+    public Vector2 scoresPosition;
+
+    public void ScoresAppear(float duration = 1f)
+    {
+
+        scoresGroup.alpha = 0f;
+        scoresRectTransform.localPosition = new Vector3 (0, 250, 0);
+
+        scoresGroup.DOFade(1, duration).SetEase(Ease.InOutSine);
+        scoresRectTransform.DOAnchorPos(scoresPosition, duration, false).SetEase(Ease.OutSine);
+
+    }
 }

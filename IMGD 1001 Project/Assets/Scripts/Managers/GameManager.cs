@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         uiManager.DebugMenuOff();
+        uiManager.ScoresAppear();
         StartCoroutine(ServeBall(countdownSeconds));
     }
     private void Update()
