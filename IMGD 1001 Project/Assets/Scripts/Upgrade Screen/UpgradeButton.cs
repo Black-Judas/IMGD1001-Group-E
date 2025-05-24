@@ -38,7 +38,10 @@ public class UpgradeButton : MonoBehaviour
 
     private void Update()
     {
-        UpdateColor();
+        if (upgradeSelectionScreen.selectionPhase)
+        {
+            UpdateColor();
+        }
     }
 
     private void UpdateText()
