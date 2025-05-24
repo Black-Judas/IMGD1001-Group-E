@@ -19,8 +19,8 @@ public class GameManager : MonoBehaviour
 
 
     //General UI references
+    private UIManager uiManager;
     public TMP_Text countdownText;
-    public GameObject debugMenu;
     public TMP_Text announcementText;
     public UpgradeSelectionScreen upgradeSelectionScreen;
 
@@ -28,8 +28,8 @@ public class GameManager : MonoBehaviour
     //Unity methods
     private void Start()
     {
-        ToggleDebugMenu();
-        upgradeSelectionScreen.gameObject.SetActive(false);
+        uiManager.DebugMenuOff();
+        uiManager.ScoresAppear();
         StartCoroutine(ServeBall(countdownSeconds));
     }
     private void Update()
@@ -41,16 +41,14 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.BackQuote))
         {
-            ToggleDebugMenu();
+            uiManager.ToggleDebugMenu();
         }
     }
-
-    //Debug methods
-    public void ToggleDebugMenu() //Toggle the debug menu
+    private void Awake()
     {
-        //Debug.Log("Debug toggled");
-        debugMenu.SetActive(!debugMenu.activeSelf);
+        uiManager = FindObjectOfType<UIManager>();
     }
+
 
     //Go to the main menu
     public void GoToMainMenu()
@@ -60,6 +58,12 @@ public class GameManager : MonoBehaviour
 
 
     //Game methods
+    public void StartRound()
+    {
+        player1RoundScoreCounter.ResetScore();
+        player2RoundScoreCounter.ResetScore();
+        StartCoroutine(ServeBall(countdownSeconds));
+    }
     public void Player1Scores()
     {
 
@@ -164,14 +168,6 @@ public class GameManager : MonoBehaviour
         }
         ResetPlayArea();
         upgradeSelectionScreen.StartPicking(loser);
-
-        //Wait until the player has selected their upgrade before continuing
-        yield return new WaitUntil(() => upgradeSelectionScreen.gameObject.activeSelf == false);
-
-        //Start the next round
-        player1RoundScoreCounter.ResetScore();
-        player2RoundScoreCounter.ResetScore();
-        StartCoroutine(ServeBall(countdownSeconds));
 
     }
 
